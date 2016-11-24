@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>There is no tracking information for the current branch 以及更改传输协议 | Glooory&#39;s blog</title>
+  <title>一道菜的感想 | Glooory&#39;s blog</title>
   <meta name="author" content="Glooory Pu">
   
   <meta name="description" content="Glooory&#39;s blog">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="There is no tracking information for the current branch 以及更改传输协议"/>
+  <meta property="og:title" content="一道菜的感想"/>
   <meta property="og:site_name" content="Glooory&#39;s blog"/>
 
   
@@ -83,10 +83,10 @@
     <header>
         <div class="icon"></div>
         
-        <time datetime="2016-10-30T13:56:02.000Z"><a href="/2016/10/30/There-is-no-tracking-information-for-the-current-branch-错误/">2016-10-30</a></time>
+        <time datetime="2016-11-24T13:04:47.000Z"><a href="/2016/11/24/一道菜名引发的感想/">2016-11-24</a></time>
         
   
-    <h1 class="title">There is no tracking information for the current branch 以及更改传输协议</h1>
+    <h1 class="title">一道菜的感想</h1>
   
 
     </header>
@@ -95,32 +95,15 @@
       
         
     <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#更改传输协议"><span class="toc-text">更改传输协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#There-is-no-tracking-information-for-the-current-branch"><span class="toc-text">There is no tracking information for the current branch</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#引言"><span class="toc-text">引言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#汆汤肉-or-滑肉"><span class="toc-text">汆汤肉 or 滑肉</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#最后"><span class="toc-text">最后</span></a></li></ol>
     </div>
 
-        <h4 id="更改传输协议"><a href="#更改传输协议" class="headerlink" title="更改传输协议"></a>更改传输协议</h4><p>今天使用 Git 工具向我的 pages repo push 时每次都要输入账户名和密码，后来在网上查了</p>
-<p>一下，原来是我以前关联远程库的时候使用了 https 的方式，所以每次都要用 https 的方式 </p>
-<a id="more"></a>
-<p>push 到远程库，于是就找解决办法重新设置成了 ssh 的方式。</p>
-<p>首先查看当前使用的传输协议：</p>
-<p><code>git remote -v</code></p>
-<p>如果输出 <code>origin  https://github.com/username/repository.git</code> 说明使用的是 https 方式，</p>
-<p>如果输出 <code>origin  git@github.com:username/repository.git</code> 则表明使用的是 ssh 方式。</p>
-<p>重置成 ssh 的方法:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote rm origin</div><div class="line">git remote add origin git@github.com:username/repository.git</div></pre></td></tr></table></figure>
-<p>就是先取关再重新以 ssh 的方式关联远程库。</p>
-<p>刚看见了还有另一种方法，更简单：</p>
-<p><code>git remote set-url origin git@github.com:username/repository.git</code></p>
-<h4 id="There-is-no-tracking-information-for-the-current-branch"><a href="#There-is-no-tracking-information-for-the-current-branch" class="headerlink" title="There is no tracking information for the current branch"></a>There is no tracking information for the current branch</h4><p>由于我上面有取关远程库再重新以另一种方式关联的操作，当我 pull 的时候就报了如下错误：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ git pull</div><div class="line">There is no tracking information for the current branch.</div><div class="line">Please specify which branch you want to merge with.</div><div class="line">See git-pull(1) for details.</div><div class="line"></div><div class="line">    git pull &lt;remote&gt; &lt;branch&gt;</div><div class="line"></div><div class="line">If you wish to set tracking information for this branch you can do so with:</div><div class="line"></div><div class="line">    git branch --set-upstream-to=origin/&lt;branch&gt; master</div></pre></td></tr></table></figure>
-<p>原因是本地分支和远程分支没有建立联系，不知道是不是我刚才更改传输协议的时候造成的，</p>
-<p>使用<code>git remote -vv</code> 查看本地分支和远程分支的关联关系，输出如下：</p>
-<p><code>master 8129bac commit_information</code></p>
-<p>执行以下命令进行本地和远程分支间的关联：</p>
-<p><code>git branch --set-upstream-to=origin/远程分支的名字 本地分支的名字</code> </p>
-<p>再查看关联关系输出如下：</p>
-<p><code>master 8129bac [origin/master] commit_information</code></p>
-<p>对比前后两次输出就能发现为什么会出现该问题了，现在可以愉快的 pull 和 push 了。</p>
+        <p><img src="http://ofszo78lw.bkt.clouddn.com/blog/20161124/210131947.jpg" alt="Happy Thanksgiving">  </p>
+<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>今天晚上在外面吃晚饭的时候，听到有位顾客问那老板<code>滑肉</code>是什么，我一听我还挺熟悉这个名词的，于是我就想起了我自己过去的一些事情，跟<code>滑肉</code>有点关系。</p>
+<h4 id="汆汤肉-or-滑肉"><a href="#汆汤肉-or-滑肉" class="headerlink" title="汆汤肉 or 滑肉"></a>汆汤肉 or 滑肉</h4><p>小时候快过年的时候，基本每家都会留一头猪来杀了过年，有的家里没养猪的也会去其他人家里买一头来杀。虽然有很多年没见过杀猪的场景了，但那些场景应该是这辈子都不会忘了。我印象比较深刻的是我家地坝角落上有颗桑树，上面还有一颗葡萄树呢，不过现在由于修公路被推掉了，只剩下了一个树桩还在那里，它的形状歪得正好合适挂东西，所以每次我家的猪烫了除毛之后都是挂在那桑树上进行后续工作的。当天杀猪那家人都会煮一顿比较好的饭菜招待杀猪的师傅和帮忙的邻居，我只记得反正我妈那天都会煮一锅<code>汆汤肉</code>的，这就是我对<code>汆汤肉</code>最初的记忆。</p>
+<p>上初中后，我就搬到城里舅舅家里去寄宿上学了，我舅家习惯把我妈口中的<code>汆汤肉</code>叫成<code>滑肉</code>,当时我只觉得叫<code>滑肉</code>也挺合适的，因为煮的时候在肉上抹了一层红薯粉，煮熟之后就很滑，筷子不是很容易夹，所以叫<code>滑肉</code>有点见名知意的意思，当时我是不知道其实我妈口中的<code>汆汤肉</code>是可以用书面文字写出来的，以为就是方言中的一个口头词，比如说像<code>帮我    diā 一下这个东西</code>中的<code>diā</code>，直到有一天的语文课上才知道原来真的有<code>汆汤肉</code>这个词。</p>
+<p>初中给我们上语文课的老师是我们的班主任，他总喜欢在我们面前自称老罗，我们也都在私底下叫他老罗，其实我还是很喜欢老罗给我们叫故事的，比讲课文有意思多了。我依稀记得那天他在黑板上写了个 <a href="http://baike.baidu.com/link?url=vfvJDfhd8DUxTKDTBfrdAbk1wlkwirKBcZebweTipB1_mXXeXL4ej6CMR3QpMmbK37VXptp03ozoRk8RWZh56KxJu-cNBh82n86EH0BVjV7" target="_blank" rel="external">汆</a> 字，问我们有没有认识的？我们都摇了摇头，他就说这个字怎么念，还从间架结构上分析了这个字，说这个字上面一个入，下面一个水，就是入水嘛，然后又说了一个故事，这个故事跟我上面说的一样，就是以往过去每家过年前都会杀猪，杀了猪都会煮上一道菜，叫<code>汆汤肉</code>，就是把肉入水煮嘛，所以这道菜就叫<code>汆汤肉</code>。我听了之后瞬间就感觉很神奇，原来我妈口中的汆汤肉是这么回事和这么写的。</p>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>关于这道菜和我的故事就写这么多了，由我自己在饭馆听到的一段对话想起了一些过去了的事和人，刚好明天就是美国和加拿大的感恩节了，也借此机会想对曾经予以我帮助的家人、亲戚、朋友以及老师们表示感谢。</p>
 
       
     </div>
@@ -129,12 +112,12 @@
         
   
   <div class="categories">
-    <a href="/categories/技术/">技术</a>, <a href="/categories/技术/git/">git</a>
+    <a href="/categories/生活/">生活</a>, <a href="/categories/生活/随想/">随想</a>
   </div>
 
         
   <div class="tags">
-    <a href="/tags/git/">git</a>
+    <a href="/tags/汆汤肉/">汆汤肉</a>
   </div>
 
         <div class = "counter">
@@ -161,7 +144,7 @@
     
     
         <!-- 多说评论框 start -->
-        <div class="ds-thread" data-thread-key="2016/10/30/There-is-no-tracking-information-for-the-current-branch-错误/" data-title="There is no tracking information for the current branch 以及更改传输协议" data-url="http://glooory.com/2016/10/30/There-is-no-tracking-information-for-the-current-branch-错误/"></div>
+        <div class="ds-thread" data-thread-key="2016/11/24/一道菜名引发的感想/" data-title="一道菜的感想" data-url="http://glooory.com/2016/11/24/一道菜名引发的感想/"></div>
         <!-- 多说评论框 end -->
         <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
         <script type="text/javascript">

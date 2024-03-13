@@ -1,0 +1,3 @@
+[submodule "themes/hexo-theme-xoxo-plus"] 
+  path = themes/hexo-theme-xoxo-plus 
+  url = git@github.com:Glooory/hexo-theme-xoxo-plus.git

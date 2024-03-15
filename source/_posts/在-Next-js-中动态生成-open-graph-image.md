@@ -8,7 +8,11 @@ categories:
   - 前端技术
 ---
 
-根据 [The Open Graph protocol](https://ogp.me/)，可以在网页的 HTML 文档里面加入特定的 metadata，当用户分享网页链接到社交媒体、即时通讯等 App 时，有些 App 会根据这些 metadata 显示一些该网页预览信息，比如网站的标题、简介和一张预览图，这些信息比单纯的一个链接更丰富，也可能更加有利于分享和传播。当然，并不是所有的社交媒体、即时通讯 App 都有这个功能，网页侧能做的也只能做好自己这边的事情，网页侧要实现 OGP 比较简单，只需在 HTML 文档里面加上对应的 metadata 即可，类似下面这样：
+根据 [The Open Graph protocol](https://ogp.me/)，可以在网页的 HTML 文档里面加入特定的 metadata，当用户分享网页链接到社交媒体、即时通讯等 App 时，有些 App 会根据这些 metadata 显示一些该网页预览信息，比如网站的标题、简介和一张预览图，这些信息比单纯的一个链接更丰富，也可能更加有利于分享和传播，类似下面这样的效果：
+
+![](https://raw.githubusercontent.com/Glooory/images/master/blog/open_graph_image_sample.png)
+
+当然，并不是所有的社交媒体、即时通讯 App 都有这个功能，网页侧能做的也只能做好自己这边的事情，网页侧要实现 OGP 比较简单，只需在 HTML 文档里面加上对应的 metadata 即可，类似下面这样：
 ```
 <html>
 <head>

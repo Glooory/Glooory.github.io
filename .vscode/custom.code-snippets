@@ -1,0 +1,28 @@
+{
+  "Print to console": {
+    "prefix": "con",
+    "body": ["console.log(\"${1:name}: \", ${1:name})"],
+    "description": "Log output to console",
+  },
+  "New React Functional Component": {
+    "prefix": "nc",
+    "body": [
+      "import styles from \"./styles.module.css\"",
+      "",
+      "export interface ${1:name}Props {",
+      "}",
+      "",
+      "const ${1:name} = (props: ${1:name}Props) => {",
+      "  return (",
+      "    <div>",
+      "      $2",
+      "    </div>",
+      "  )",
+      "};",
+      "",
+      "export default ${1:name};",
+      "",
+    ],
+    "description": "New React Functional Component",
+  },
+}

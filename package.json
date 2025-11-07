@@ -21,8 +21,15 @@
   "dependencies": {
     "@mantine/core": "8.3.6",
     "@mantine/hooks": "8.3.6",
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
     "@next/bundle-analyzer": "^16.0.0",
+    "@next/mdx": "^16.0.1",
     "@tabler/icons-react": "^3.35.0",
+    "@types/mdx": "^2.0.13",
+    "dayjs": "^1.11.19",
+    "glob": "^11.0.3",
+    "gray-matter": "^4.0.3",
     "next": "16.0.1",
     "react": "19.2.0",
     "react-dom": "19.2.0"

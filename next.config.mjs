@@ -1,13 +1,21 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
+import createMDX from "@next/mdx";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-export default withBundleAnalyzer({
-  output: "export",
-  reactStrictMode: false,
-  experimental: {
-    optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
-  },
+const withMDX = createMDX({
+  extension: /\.(md|mdx)$/,
 });
+
+export default withBundleAnalyzer(
+  withMDX({
+    output: "export",
+    reactStrictMode: false,
+    pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+    experimental: {
+      optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
+    },
+  })
+);

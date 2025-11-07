@@ -1,0 +1,41 @@
+---
+title: "Demo blog"
+publishedAt: "2022-04-16"
+updatedAt: "2024-12-19"
+tags: [Git]
+categories:
+  - 编程技术
+---
+
+import { Welcome } from "../components/Welcome/Welcome";
+
+# Welcome to my MDX page!
+
+This is some **bold** and _italics_ text.
+
+This is a list in markdown:
+
+- One
+- Two
+- Three
+
+```TypeScript
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const { default: Post } = await import(`@/content/${slug}.mdx`)
+
+  return <Post />
+}
+
+export function generateStaticParams() {
+  return [{ slug: 'welcome' }, { slug: 'about' }]
+}
+```
+
+Checkout my React component:
+
+<Welcome />

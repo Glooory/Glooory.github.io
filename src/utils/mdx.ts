@@ -1,0 +1,66 @@
+import fs from "fs";
+import path from "path";
+import { sync } from "glob";
+import matter from "gray-matter";
+import { POST_EXTENSTION_REGEX } from "@/constants/file";
+import { Post, PostMetadata } from "@/type";
+
+const postsRelativePath = "src/posts";
+
+const postPaths = path.join(process.cwd(), postsRelativePath);
+
+export async function getPostSlug() {
+  const paths = sync(`${postPaths}/*.mdx`); // fixme: maybe ends with .md
+
+  return paths.map((path) => {
+    const pathContent = path.split("/");
+    const fileName = pathContent[pathContent.length - 1];
+    const [slug, _extension] = fileName.split(".");
+
+    return slug;
+  });
+}
+
+export async function getPostFromPostSlug(slug: string) {
+  const postPath = path.join(postPaths, `${slug}.mdx`); // fixme: maybe ends with .md
+  const source = fs.readFileSync(postPath);
+  const { content, data } = matter(source);
+
+  console.log(
+    JSON.stringify({
+      content,
+      frontmatter: {
+        slug,
+        title: data.title,
+        publishedAt: data.publishedAt,
+        ...data,
+      },
+    })
+  );
+
+  return {
+    content,
+    frontmatter: {
+      slug,
+      title: data.title,
+      publishedAt: data.publishedAt,
+      ...data,
+    },
+  };
+}
+
+export function getAllPosts(): Post[] {
+  const postPaths = fs.readdirSync(path.join(process.cwd(), postsRelativePath));
+
+  return postPaths.map((postPath) => {
+    const source = fs.readFileSync(path.join(process.cwd(), postsRelativePath, postPath), "utf-8");
+    const { data, content } = matter(source, { excerpt: true });
+
+    return {
+      ...(data as PostMetadata),
+      content,
+      slug: postPath.replace(POST_EXTENSTION_REGEX, ""),
+      filePath: postPath,
+    };
+  });
+}

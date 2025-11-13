@@ -4,19 +4,124 @@
   width: 100%;
   height: var(--header-height);
   padding: 0 var(--space-lg);
+  background-color: var(--white);
+  z-index: var(--z-index-header);
 }
 
-.content {
+.header__content {
   max-width: var(--max-content-width);
   height: var(--header-height);
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
-.title {
+.header__title {
   display: flex;
   align-items: center;
   margin: 0;
+}
+
+.header__nav {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.hamburger {
+  margin: 0 auto;
+  width: 24px;
+  height: 18px;
+  position: relative;
+}
+
+.hamburger .bar {
+  padding: 0;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
+  display: block;
+  border-radius: 2px;
+  transition: all 0.4s ease-in-out;
+  position: absolute;
+}
+
+.bar1 {
+  top: 0;
+}
+
+.bar2,
+.bar3 {
+  top: 8px;
+}
+
+.bar3 {
+  right: 0;
+}
+
+.bar4 {
+  bottom: 0;
+}
+
+.hamburger .bar1 {
+  transform-origin: 5%;
+}
+
+.hamburger .bar4 {
+  transform-origin: 5%;
+}
+
+.hamburger-checkbox:checked + label > .hamburger > .bar1 {
+  transform: rotate(45deg);
+  height: 2px;
+  width: 28px;
+}
+
+.hamburger-checkbox:checked + label > .hamburger > .bar3 {
+  transform: rotate(45deg);
+  height: 2px;
+  background-color: transparent;
+}
+
+.hamburger-checkbox:checked + label > .hamburger > .bar2 {
+  transform: rotate(-45deg);
+  height: 2px;
+  background-color: transparent;
+}
+
+.hamburger-checkbox:checked + label > .hamburger > .bar4 {
+  transform: rotate(-45deg);
+  height: 2px;
+  width: 28px;
+}
+
+@media (max-width: 768px) {
+  .header__hamburger {
+    display: flex;
+  }
+
+  .header__nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: var(--space-lg);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .header__nav--open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
 }

@@ -1,0 +1,22 @@
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: var(--header-height);
+  padding: 0 var(--space-lg);
+}
+
+.content {
+  max-width: var(--max-content-width);
+  height: var(--header-height);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}

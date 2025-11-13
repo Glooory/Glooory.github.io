@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import Head from "next/head";
 import Link from "next/link";
+import Header from "@/components/Header";
 import { getAllPosts } from "@/utils/mdx";
 
 export function getPosts() {
@@ -18,15 +18,13 @@ export default function HomePage() {
 
   return (
     <>
-      <Head>
-        <title>My Blog</title>
-      </Head>
+      <Header />
       <div>
         {posts.map((frontMatter) => {
           return (
             <Link key={frontMatter.slug} href={`/blog/${frontMatter.slug}`} passHref>
               <div>
-                <h1 className="title">{frontMatter.title}</h1>
+                <h4 className="title">{frontMatter.title}</h4>
                 <p className="summary">{frontMatter.excerpt}</p>
                 <p className="date">{dayjs(frontMatter.publishedAt).format("MMMM D, YYYY")}</p>
               </div>

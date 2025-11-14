@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import clsx from "clsx";
+import { UnstyledButton } from "@mantine/core";
 import styles from "./styles.module.css";
 
 export interface HeaderProps {}
@@ -19,22 +20,23 @@ const Header = (_props: HeaderProps) => {
         <h5 className={styles.header__title}>
           <a href="/">Glooory</a>
         </h5>
-
-        <input
-          type="checkbox"
-          id="hamburger-menu"
-          className={clsx(styles["hamburger-checkbox"], "visually-hidden")}
-          onChange={toggleMenu}
-        />
-        <label htmlFor="hamburger-menu">
-          <div className={styles.hamburger}>
-            <span className={clsx(styles.bar, styles.bar1)} />
-            <span className={clsx(styles.bar, styles.bar2)} />
-            <span className={clsx(styles.bar, styles.bar3)} />
-            <span className={clsx(styles.bar, styles.bar4)} />
-          </div>
-        </label>
-
+        <UnstyledButton
+          className={clsx(styles.menu, { [styles.opened]: isMenuOpen })}
+          onClick={toggleMenu}
+          aria-label="hamburger-menu"
+        >
+          <svg width={36} height={36} viewBox="0 0 100 100">
+            <path
+              className={clsx(styles.line, styles.line1)}
+              d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+            />
+            <path className={clsx(styles.line, styles.line2)} d="M 20,50 H 80" />
+            <path
+              className={clsx(styles.line, styles.line3)}
+              d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+            />
+          </svg>
+        </UnstyledButton>
         <nav
           className={clsx(styles.header__nav, {
             [styles["header__nav--open"]]: isMenuOpen,

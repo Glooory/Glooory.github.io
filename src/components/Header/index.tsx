@@ -3,6 +3,7 @@
 import { useState } from "react";
 import clsx from "clsx";
 import { UnstyledButton } from "@mantine/core";
+import ColorSchemeButton from "../ColorSchemeButton";
 import styles from "./styles.module.css";
 
 export interface HeaderProps {}
@@ -30,6 +31,7 @@ const Header = (_props: HeaderProps) => {
             <a href="/">Glooory</a>
           </h5>
           <nav className={styles.header__nav_desktop}>{navLinks}</nav>
+          <ColorSchemeButton classNames={{ button: styles["color-scheme__icon"] }} />
           <UnstyledButton
             className={clsx(styles.menu, { [styles.opened]: isMenuOpen })}
             onClick={toggleMenu}

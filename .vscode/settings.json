@@ -10,5 +10,6 @@
     "**/*.module.{css,scss}.d.ts": true
   },
   "javascript.suggestionActions.enabled": false,
-  "eslint.useFlatConfig": true
+  "eslint.useFlatConfig": true,
+  "cSpell.words": ["mantine"]
 }

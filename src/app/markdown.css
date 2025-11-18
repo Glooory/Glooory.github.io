@@ -360,7 +360,7 @@
   padding-left: var(--space-lg);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $mantine-breakpoint-sm) {
   .markdown-content {
     padding: var(--space-xl) var(--space-md);
   }

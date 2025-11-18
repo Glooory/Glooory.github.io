@@ -306,7 +306,7 @@ mark {
   border-radius: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $mantine-breakpoint-sm) {
   h1 {
     font-size: var(--font-size-2xl);
     margin-bottom: var(--space-md);
@@ -328,16 +328,6 @@ mark {
 
   p {
     font-size: var(--font-size-base);
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: var(--font-size-xl);
-  }
-
-  h2 {
-    font-size: var(--font-size-lg);
   }
 }
 

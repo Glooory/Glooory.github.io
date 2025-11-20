@@ -25,7 +25,7 @@ const Header = (_props: HeaderProps) => {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className={clsx(styles.header, { [styles["header--menu-open"]]: isMenuOpen })}>
         <div className={styles.header__content}>
           <h5 className={styles.header__title}>
             <a href="/">Glooory</a>

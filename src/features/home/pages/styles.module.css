@@ -1,15 +1,10 @@
-.root {
-  max-width: var(--max-content-width);
-  overflow-y: auto;
-}
-
 .blogs {
-  width: 100%;
+  max-width: var(--max-content-width);
   margin: auto;
-  padding: 0 var(--space-lg);
 }
 
 @media (max-width: $mantine-breakpoint-sm) {
   .blogs {
+    padding: 0 var(--space-lg);
   }
 }

@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: var(--space-2xl) var(--space-lg);
 
-  color: var(--text-main);
+  color: var(--primary-text-color);
   font-size: var(--font-size-base);
   line-height: var(--line-height-default);
 
@@ -19,7 +19,7 @@
 .markdown-content h6 {
   font-weight: 700;
   line-height: 1.3;
-  color: var(--text-main);
+  color: var(--primary-text-color);
   margin-top: var(--space-2xl);
   margin-bottom: var(--space-lg);
   scroll-margin-top: calc(var(--header-height) + var(--space-lg)); /* For anchor links */
@@ -60,7 +60,7 @@
 .markdown-content strong,
 .markdown-content b {
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--primary-text-color);
 }
 
 .markdown-content em,
@@ -76,7 +76,7 @@
 
 .markdown-content small {
   font-size: var(--font-size-sm);
-  color: var(--text-sub);
+  color: var(--secondary-text-color);
 }
 
 .markdown-content a {
@@ -164,7 +164,7 @@
 
 .markdown-content pre code {
   background: var(--transparent);
-  color: var(--text-main);
+  color: var(--primary-text-color);
   padding: 0;
   font-size: var(--font-size-sm);
   border-radius: 0;
@@ -220,7 +220,7 @@
 
 .markdown-content blockquote cite {
   font-style: italic;
-  color: var(--text-sub);
+  color: var(--secondary-text-color);
   font-size: var(--font-size-sm);
 }
 
@@ -239,7 +239,7 @@
 .markdown-content figcaption {
   text-align: center;
   font-size: var(--font-size-sm);
-  color: var(--text-sub);
+  color: var(--secondary-text-color);
   margin-top: var(--space-sm);
   font-style: italic;
 }
@@ -269,7 +269,7 @@
   text-align: left;
   padding: var(--space-md);
   border-bottom: 2px solid var(--gray-3);
-  color: var(--text-main);
+  color: var(--primary-text-color);
 }
 
 .markdown-content td {
@@ -340,7 +340,7 @@
 
 .markdown-content del {
   text-decoration: line-through;
-  color: var(--text-sub);
+  color: var(--secondary-text-color);
 }
 
 .markdown-content ins {
@@ -353,7 +353,7 @@
   padding-top: var(--space-xl);
   border-top: 2px solid var(--gray-2);
   font-size: var(--font-size-sm);
-  color: var(--text-sub);
+  color: var(--secondary-text-color);
 }
 
 .markdown-content .footnotes ol {

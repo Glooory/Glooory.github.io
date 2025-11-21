@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
-import Link from "next/link";
 import Header from "@/components/Header";
+import { Post } from "@/type";
 import { getAllPosts } from "@/utils/mdx";
 import styles from "./styles.module.css";
 
-export function getPosts() {
+function getPosts(): Post[] {
   const posts = getAllPosts();
 
   return [...posts]
@@ -14,22 +14,50 @@ export function getPosts() {
     .reverse();
 }
 
-function HomePage() {
+function getGroupedPosts(): Record<string, Post[]> {
   const posts = getPosts();
+  const groupedPosts: Record<string, Post[]> = {};
+
+  posts.forEach((post) => {
+    const year = dayjs(post.publishedAt).year();
+    if (!groupedPosts[year]) {
+      groupedPosts[year] = [];
+    }
+    groupedPosts[year].push(post);
+  });
+
+  return groupedPosts;
+}
+
+function HomePage() {
+  const postsData = getGroupedPosts();
 
   return (
     <main className={styles.root}>
       <Header />
       <div className={styles.blogs}>
-        {posts.map((frontMatter) => {
+        {Object.entries(postsData).map(([year, posts]) => {
           return (
-            <Link key={frontMatter.slug} href={`/blog/${frontMatter.slug}`} passHref>
-              <div>
-                <h4 className="title">{frontMatter.title}</h4>
-                <p className="summary">{frontMatter.excerpt}</p>
-                <p className="date">{dayjs(frontMatter.publishedAt).format("MMMM D, YYYY")}</p>
+            <section key={year}>
+              <h4>
+                <span>{year}</span>
+              </h4>
+              <div className={styles.posts}>
+                {posts.map((post) => {
+                  return (
+                    <div key={post.title} className={styles.post}>
+                      <a href={`/post/${post.slug}`}>
+                        <div>
+                          <span className={styles.date}>{dayjs(post.publishedAt).format("MM-DD")}</span>
+                          <span className={styles.slash}> / </span>
+                          {post.title}
+                        </div>
+                      </a>
+                    </div>
+                  );
+                })}
               </div>
-            </Link>
+            </section>
           );
         })}
       </div>

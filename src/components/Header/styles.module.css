@@ -4,9 +4,9 @@
   width: 100%;
   height: var(--header-height);
   padding: 0 var(--space-lg);
-  background-color: var(--bg-main);
+  background-color: var(--primary-bg-color);
   z-index: var(--z-index-header);
-  background-color: rgb(from var(--bg-main) r g b / 0.75);
+  background-color: rgb(from var(--primary-bg-color) r g b / 0.75);
   backdrop-filter: blur(8px);
 }
 
@@ -43,7 +43,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  color: var(--text-main);
+  color: var(--primary-text-color);
 }
 
 .line {
@@ -121,7 +121,7 @@
     z-index: calc(var(--z-index-header) - 1);
     transform: translateY(-100%);
     transition: all 0.3s ease;
-    background-color: rgb(from var(--bg-main) r g b / 0.75);
+    background-color: rgb(from var(--primary-bg-color) r g b / 0.75);
     backdrop-filter: blur(8px);
   }
 

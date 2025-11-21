@@ -29,6 +29,20 @@
   --gray-8: var(--mantine-color-gray-8);
   --gray-9: var(--mantine-color-gray-9);
 
+  --primary-color-0: var(--mantine-color-blue-0);
+  --primary-color-1: var(--mantine-color-blue-1);
+  --primary-color-2: var(--mantine-color-blue-2);
+  --primary-color-3: var(--mantine-color-blue-3);
+  --primary-color-4: var(--mantine-color-blue-4);
+  --primary-color-5: var(--mantine-color-blue-5);
+  --primary-color-6: var(--mantine-color-blue-6);
+  --primary-color-7: var(--mantine-color-blue-7);
+  --primary-color-8: var(--mantine-color-blue-8);
+  --primary-color-9: var(--mantine-color-blue-9);
+
+  --primary-color: var(--primary-color-7);
+  --secondary-color: var(--primary-color-5);
+
   --space-2: 2px;
   --space-4: 4px;
   --space-6: 6px;
@@ -97,16 +111,17 @@
 
   --header-height: 60px;
 
-  --text-main: var(--mantine-color-text);
-  --text-sub: var(--mantine-color-text);
-  --text-placeholder: var(--mantine-color-placeholder);
-  --text-alert: var(--mantine-color-error);
+  --primary-text-color: var(--mantine-color-text);
+  --secondary-text-color: var(--mantine-color-placeholder);
+  --placeholder-color: var(--mantine-color-placeholder);
+  --error-color: var(--mantine-color-error);
+  --border-color: var(--mantine-color-default-border);
 
-  --bg-main: var(--mantine-color-body);
+  --primary-bg-color: var(--mantine-color-body);
 }
 
 html {
-  color: var(--text-main);
+  color: var(--primary-text-color);
   font-weight: var(--font-weight-default);
   line-height: var(--line-height-default);
 }
@@ -123,7 +138,7 @@ h1 {
   font-size: var(--font-size-3xl);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--text-main);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-lg);
   letter-spacing: -0.02em;
 }
@@ -132,7 +147,7 @@ h2 {
   font-size: var(--font-size-2xl);
   font-weight: 700;
   line-height: 1.3;
-  color: var(--text-main);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-md);
   letter-spacing: -0.01em;
 }
@@ -141,7 +156,7 @@ h3 {
   font-size: var(--font-size-xl);
   font-weight: 600;
   line-height: 1.4;
-  color: var(--text-main);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-md);
 }
 
@@ -149,7 +164,7 @@ h4 {
   font-size: var(--font-size-lg);
   font-weight: 600;
   line-height: 1.5;
-  color: var(--text-main);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-sm);
 }
 
@@ -157,7 +172,7 @@ h5 {
   font-size: var(--font-size-base);
   font-weight: 600;
   line-height: 1.5;
-  color: var(--text-main);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-sm);
 }
 
@@ -236,7 +251,7 @@ ol ul {
 strong,
 b {
   font-weight: 600;
-  color: var(--text-main);
+  color: var(--primary-text-color);
 }
 
 em,
@@ -269,7 +284,7 @@ code {
   background-color: var(--color-bg-secondary);
   padding: 0.2em 0.4em;
   border-radius: 3px;
-  color: var(--text-main);
+  color: var(--primary-text-color);
 }
 
 pre {
@@ -336,7 +351,7 @@ mark {
 }
 
 .text-primary {
-  color: var(--text-main);
+  color: var(--primary-text-color);
 }
 
 .text-accent {

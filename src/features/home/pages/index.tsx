@@ -53,6 +53,7 @@ function HomePage() {
                           {post.title}
                         </div>
                       </a>
+                      {post.excerpt}
                     </div>
                   );
                 })}

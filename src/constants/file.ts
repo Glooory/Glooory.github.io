@@ -1,1 +1,1 @@
-export const POST_EXTENSTION_REGEX = /\.mdx?$/i;
+export const postExtensionRegex = /\.mdx?$/i;

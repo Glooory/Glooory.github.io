@@ -122,6 +122,7 @@
 
 html {
   color: var(--primary-text-color);
+  font-size: var(--font-size-base);
   font-weight: var(--font-weight-default);
   line-height: var(--line-height-default);
 }
@@ -180,7 +181,7 @@ h6 {
   font-size: var(--font-size-sm);
   font-weight: 600;
   line-height: 1.5;
-  color: var(--color-text-secondary);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-sm);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -189,7 +190,7 @@ h6 {
 p {
   font-size: var(--font-size-base);
   line-height: var(--line-height-default);
-  color: var(--color-text-secondary);
+  color: var(--primary-text-color);
   margin-bottom: var(--space-md);
 }
 
@@ -220,7 +221,7 @@ ul,
 ol {
   margin-bottom: var(--space-md);
   padding-left: var(--space-lg);
-  color: var(--color-text-secondary);
+  color: var(--primary-text-color);
 }
 
 ul {
@@ -268,7 +269,7 @@ blockquote {
   border-left: 4px solid var(--color-border);
   padding-left: var(--space-md);
   margin: var(--space-lg) 0;
-  color: var(--color-text-secondary);
+  color: var(--primary-text-color);
   font-style: italic;
 }
 
@@ -347,15 +348,11 @@ mark {
 }
 
 .text-secondary {
-  color: var(--color-text-secondary);
+  color: var(--secondary-text-color);
 }
 
 .text-primary {
   color: var(--primary-text-color);
-}
-
-.text-accent {
-  color: var(--color-primary);
 }
 
 .mb-0 {

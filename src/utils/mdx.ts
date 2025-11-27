@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { sync } from "glob";
 import matter from "gray-matter";
-import { POST_EXTENSTION_REGEX } from "@/constants/file";
+import { postExtensionRegex } from "@/constants/file";
 import { Post, PostMetadata } from "@/type";
 
 const postsRelativePath = "src/posts";
@@ -26,18 +26,6 @@ export async function getPostFromPostSlug(slug: string) {
   const source = fs.readFileSync(postPath);
   const { content, data } = matter(source);
 
-  console.log(
-    JSON.stringify({
-      content,
-      frontmatter: {
-        slug,
-        title: data.title,
-        publishedAt: data.publishedAt,
-        ...data,
-      },
-    })
-  );
-
   return {
     content,
     frontmatter: {
@@ -54,12 +42,25 @@ export function getAllPosts(): Post[] {
 
   return postPaths.map((postPath) => {
     const source = fs.readFileSync(path.join(process.cwd(), postsRelativePath, postPath), "utf-8");
-    const { data, content } = matter(source, { excerpt: true });
+    const { data, content, excerpt } = matter<string, {}>(source, {
+      excerpt: (file: { content: string; excerpt?: string }) => {
+        file.excerpt = `${file.content
+          .split("\n")
+          .filter((line) => line.trim() !== "")
+          .filter((line) => !line.startsWith("import"))
+          .filter((line) => !line.startsWith("#"))
+          .slice(0, 10)
+          .join(" ")
+          .slice(0, 100)}...`;
+        return file;
+      },
+    });
 
     return {
       ...(data as PostMetadata),
       content,
-      slug: postPath.replace(POST_EXTENSTION_REGEX, ""),
+      excerpt,
+      slug: postPath.replace(postExtensionRegex, ""),
       filePath: postPath,
     };
   });

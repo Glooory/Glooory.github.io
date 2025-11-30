@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import Header from "@/components/Header";
-import { Post } from "@/type";
 import { getAllPosts } from "@/helpers/post";
+import { Post } from "@/type";
 import styles from "./styles.module.css";
 
 function getPosts(): Post[] {
@@ -53,7 +53,6 @@ function HomePage() {
                           {post.title}
                         </div>
                       </a>
-                      {post.excerpt}
                     </div>
                   );
                 })}

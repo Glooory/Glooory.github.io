@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import Header from "@/components/Header";
 import { Post } from "@/type";
-import { getAllPosts } from "@/utils/mdx";
+import { getAllPosts } from "@/helpers/post";
 import styles from "./styles.module.css";
 
 function getPosts(): Post[] {

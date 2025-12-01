@@ -22,13 +22,13 @@ const ColorSchemeButton = (props: ColorSchemeButtonProps) => {
 
   useEffect(() => setRendered(true), []);
 
-  if (!rendered) {
-    return null;
-  }
-
   return (
     <Button variant="transparent" className={clsx(styles.button, classNames?.button)} onClick={toggleColorScheme}>
-      {colorScheme === "light" ? <IconSun size={24} {...iconProps} /> : <IconMoon size={24} {...iconProps} />}
+      {!rendered || colorScheme === "light" ? (
+        <IconSun size={24} {...iconProps} />
+      ) : (
+        <IconMoon size={24} {...iconProps} />
+      )}
     </Button>
   );
 };

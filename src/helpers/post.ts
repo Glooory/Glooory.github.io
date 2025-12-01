@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import fs from "fs";
 import path from "path";
 import { sync } from "glob";
@@ -37,31 +38,51 @@ export async function getPostFromPostSlug(slug: string) {
   };
 }
 
-export function getAllPosts(): Post[] {
+export function getAllPosts(reverse = true): Post[] {
   const postPaths = fs.readdirSync(path.join(process.cwd(), postsRelativePath));
 
-  return postPaths.map((postPath) => {
-    const source = fs.readFileSync(path.join(process.cwd(), postsRelativePath, postPath), "utf-8");
-    const { data, content, excerpt } = matter<string, {}>(source, {
-      excerpt: (file: { content: string; excerpt?: string }) => {
-        file.excerpt = `${file.content
-          .split("\n")
-          .filter((line) => line.trim() !== "")
-          .filter((line) => !line.startsWith("import"))
-          .filter((line) => !line.startsWith("#"))
-          .slice(0, 10)
-          .join(" ")
-          .slice(0, 100)}...`;
-        return file;
-      },
-    });
+  const posts = postPaths
+    .map((postPath) => {
+      const source = fs.readFileSync(path.join(process.cwd(), postsRelativePath, postPath), "utf-8");
+      const { data, content, excerpt } = matter<string, {}>(source, {
+        excerpt: (file: { content: string; excerpt?: string }) => {
+          file.excerpt = `${file.content
+            .split("\n")
+            .filter((line) => line.trim() !== "")
+            .filter((line) => !line.startsWith("import"))
+            .filter((line) => !line.startsWith("#"))
+            .slice(0, 10)
+            .join(" ")
+            .slice(0, 100)}...`;
+          return file;
+        },
+      });
 
-    return {
-      ...(data as PostMetadata),
-      content,
-      excerpt,
-      slug: postPath.replace(postExtensionRegex, ""),
-      filePath: postPath,
-    };
+      return {
+        ...(data as PostMetadata),
+        content,
+        excerpt,
+        slug: postPath.replace(postExtensionRegex, ""),
+        filePath: postPath,
+      };
+    })
+    .sort((a, b) => {
+      return dayjs(a.publishedAt).unix() - dayjs(b.publishedAt).unix();
+    });
+  return reverse ? posts.reverse() : posts;
+}
+
+export function getPostsGroupedByYear(): Record<string, Post[]> {
+  const posts = getAllPosts();
+  const groupedPosts: Record<string, Post[]> = {};
+
+  posts.forEach((post) => {
+    const year = dayjs(post.publishedAt).year();
+    if (!groupedPosts[year]) {
+      groupedPosts[year] = [];
+    }
+    groupedPosts[year].push(post);
   });
+
+  return groupedPosts;
 }

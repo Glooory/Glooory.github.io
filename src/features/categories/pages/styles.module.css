@@ -1,0 +1,22 @@
+.root {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--tag-bg-color);
+  color: var(--tag-text-color);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+}
+
+.category:hover {
+  color: var(--tag-text-color);
+}

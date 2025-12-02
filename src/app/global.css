@@ -94,6 +94,17 @@
   --space-2xl: 3rem; /* 48px */
   --space-3xl: 4rem; /* 64px */
 
+  --border-radius-xs: 0.125rem; /* 2px */
+  --border-radius-sm: 0.25rem; /* 4px */
+  --border-radius-md: 0.375rem; /* 6px */
+  --border-radius-lg: 0.5rem; /* 8px */
+  --border-radius-xl: 0.75rem; /* 12px */
+  --border-radius-2xl: 1rem; /* 16px */
+  --border-radius-3xl: 1.5rem; /* 24px */
+  --border-radius-4xl: 2rem; /* 32px */
+  --border-radius-none: 0;
+  --border-radius-full: 99999999px;
+
   /* https://mantine.dev/styles/css-variables/#z-index-variables */
   --z-index-app: 100;
   --z-index-menu: 110;
@@ -116,6 +127,8 @@
   --placeholder-color: var(--mantine-color-placeholder);
   --error-color: var(--mantine-color-error);
   --border-color: var(--mantine-color-default-border);
+  --tag-bg-color: var(--mantine-color-blue-light);
+  --tag-text-color: var(--mantine-color-blue-light-color);
 
   --primary-bg-color: var(--mantine-color-body);
 }

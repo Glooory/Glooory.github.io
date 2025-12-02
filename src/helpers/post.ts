@@ -86,3 +86,21 @@ export function getPostsGroupedByYear(): Record<string, Post[]> {
 
   return groupedPosts;
 }
+
+export const getAllCategories = (): Record<string, Post[]> => {
+  const posts = getAllPosts();
+  const categoriesMap = posts.reduce(
+    (acc, post) => {
+      (post?.categories || []).forEach((category) => {
+        if (!acc[category]) {
+          acc[category] = [];
+        }
+        acc[category].push(post);
+      });
+      return acc;
+    },
+    {} as Record<string, Post[]>
+  );
+
+  return categoriesMap;
+};

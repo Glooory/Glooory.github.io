@@ -38,7 +38,7 @@ export async function getPostFromPostSlug(slug: string) {
   };
 }
 
-export function getAllPosts(reverse = true): Post[] {
+export function getAllPosts(isNewestFirst = true): Post[] {
   const postPaths = fs.readdirSync(path.join(process.cwd(), postsRelativePath));
 
   const posts = postPaths
@@ -69,11 +69,10 @@ export function getAllPosts(reverse = true): Post[] {
     .sort((a, b) => {
       return dayjs(a.publishedAt).unix() - dayjs(b.publishedAt).unix();
     });
-  return reverse ? posts.reverse() : posts;
+  return isNewestFirst ? posts.reverse() : posts;
 }
 
-export function getPostsGroupedByYear(): Record<string, Post[]> {
-  const posts = getAllPosts();
+export const groupPostsByYear = (posts: Post[], isNewestFirst = true): Record<string, Post[]> => {
   const groupedPosts: Record<string, Post[]> = {};
 
   posts.forEach((post) => {
@@ -84,8 +83,19 @@ export function getPostsGroupedByYear(): Record<string, Post[]> {
     groupedPosts[year].push(post);
   });
 
+  Object.values(groupedPosts).forEach((posts) => {
+    posts.sort((a, b) => {
+      return (dayjs(a.publishedAt).unix() - dayjs(b.publishedAt).unix()) * (isNewestFirst ? -1 : 1);
+    });
+  });
+
   return groupedPosts;
-}
+};
+
+export const getPostsGroupedByYear = (isNewestFirst = true): Record<string, Post[]> => {
+  const posts = getAllPosts();
+  return groupPostsByYear(posts, isNewestFirst);
+};
 
 export const getAllCategories = (): Record<string, Post[]> => {
   const posts = getAllPosts();

@@ -11,7 +11,7 @@ const CategoriesPage = (_props: CategoriesPageProps) => {
     <div className={styles.root}>
       {Object.keys(categoriesMap).map((category) => {
         return (
-          <Link key={category} className={styles.category} href={`/categories/${category}`}>
+          <Link key={category} className={styles.category} href={`/category/${category}`}>
             <span>{category}</span>
             <span>{categoriesMap[category].length}</span>
           </Link>

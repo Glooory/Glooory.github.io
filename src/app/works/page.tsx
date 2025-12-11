@@ -1,5 +1,5 @@
 export default async function Page() {
-  const page = await import(`@/features/things/pages/index.mdx`);
+  const page = await import(`@/features/works/pages/index.mdx`);
   const { default: Page } = page;
 
   return (

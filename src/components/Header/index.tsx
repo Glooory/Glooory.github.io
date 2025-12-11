@@ -18,7 +18,7 @@ const Header = (_props: HeaderProps) => {
   const navLinks = (
     <>
       <a href="/categories">Categories</a>
-      <a href="/things">Things</a>
+      <a href="/works">Made</a>
       <a href="/about">About</a>
     </>
   );

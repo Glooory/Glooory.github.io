@@ -1,9 +1,17 @@
-import fs from "node:fs";
-import path from "node:path";
+import { notFound } from "next/navigation";
+import { getAllPosts } from "@/helpers/post";
+import { Post } from "@/type";
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await import(`@/posts/${slug}.mdx`);
+  const posts: Post[] = getAllPosts();
+  const postPath = posts.find((post) => post.encodedFileName === slug || post.fileName === slug)?.filePath;
+
+  if (!postPath) {
+    return notFound();
+  }
+
+  const post = await import(`@/posts/${postPath}`);
   const { default: Post } = post;
 
   return (
@@ -14,10 +22,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 }
 
 export function generateStaticParams() {
-  const posts = fs.readdirSync(path.join("src", "posts"));
-  return posts
-    .filter((post) => post.endsWith(".md") || post.endsWith(".mdx"))
-    .map((post) => ({ slug: post.replace(/\.mdx?$/i, "") }));
+  const posts = getAllPosts();
+  return [...posts.map((post) => ({ slug: post.encodedFileName })), ...posts.map((post) => ({ slug: post.fileName }))];
 }
 
 export const dynamicParams = false;

@@ -10,6 +10,8 @@ export interface PostMetadata {
 
 export type Post = Pick<GrayMatterFile<string>, "content" | "excerpt"> &
   PostMetadata & {
-    slug: string;
+    fileName: string;
+    encodedFileName: string;
     filePath: string;
+    extension: string;
   };

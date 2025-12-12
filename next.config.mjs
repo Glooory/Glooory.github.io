@@ -7,6 +7,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
+  options: {
+    remarkPlugins: ["remark-frontmatter", "remark-gfm"],
+  },
 });
 
 export default withBundleAnalyzer(

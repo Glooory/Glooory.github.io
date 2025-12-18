@@ -354,6 +354,14 @@ blockquote {
   border: 0;
 }
 
+[data-mantine-color-scheme="light"] pre span {
+  color: var(--shiki-light);
+}
+
+[data-mantine-color-scheme="dark"] pre span {
+  color: var(--shiki-dark);
+}
+
 figure[data-rehype-pretty-code-figure] {
   margin: 0;
 }

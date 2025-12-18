@@ -1,34 +1,32 @@
 import "./normalize.css";
 //
-import "@mantine/core/styles.css";
+import "@mantine/core/styles.layer.css";
 //
 import "./global.css";
-//
-import "./markdown.css";
 
-import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from "@mantine/core";
+import { ReactNode } from "react";
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import Header from "@/components/Header";
-import { theme } from "../../theme";
-import styles from "./styles.module.css";
+import CustomMantineProvider from "@/lib/theme/CustomMantineProvider";
 
 export const metadata = {
   title: "Glooory's blog",
   description: "Where I writes",
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="zh" {...mantineHtmlProps}>
+    <html lang="zh-CN" {...mantineHtmlProps}>
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme="auto" />
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no" />
       </head>
-      <body className={styles.content}>
-        <MantineProvider theme={theme}>
+      <body className="container">
+        <CustomMantineProvider>
           <Header />
           {children}
-        </MantineProvider>
+        </CustomMantineProvider>
       </body>
     </html>
   );

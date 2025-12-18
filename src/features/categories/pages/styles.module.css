@@ -11,12 +11,7 @@
   align-items: center;
   gap: var(--space-xs);
   padding: var(--space-xs) var(--space-sm);
-  background: var(--tag-bg-color);
-  color: var(--tag-text-color);
+  background: var(--bg-subtle);
   border-radius: var(--border-radius-md);
   cursor: pointer;
-}
-
-.category:hover {
-  color: var(--tag-text-color);
 }

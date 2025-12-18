@@ -5,10 +5,21 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
+/** @type {import('rehype-pretty-code').Options} */
+const rehypePrettyCodeOptions = {
+  theme: {
+    light: "github-light",
+    dark: "github-dark-dimmed",
+  },
+  keepBackground: false,
+  defaultLanguage: "plaintext",
+};
+
 const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
   options: {
     remarkPlugins: ["remark-frontmatter", "remark-gfm"],
+    rehypePlugins: [["rehype-pretty-code", rehypePrettyCodeOptions]],
   },
 });
 

@@ -1,4 +1,6 @@
+import CategoryTag from "@/components/CategoryTag";
 import { Post } from "@/type";
+import { formatDate } from "@/utils/date";
 import styles from "./styles.module.css";
 
 export interface BlogPageProps {
@@ -13,7 +15,14 @@ const BlogPage = async (props: BlogPageProps) => {
 
   return (
     <article className={styles.post}>
-      <h1>{post.title}</h1>
+      <h1 className={styles.title}>{post.title}</h1>
+      <div className={styles.metadata}>
+        <span>{formatDate(post.publishedAt)}</span>
+        <span>/</span>
+        {post.categories.map((category, index) => (
+          <CategoryTag key={index} category={category} />
+        ))}
+      </div>
       <PostContent />
     </article>
   );

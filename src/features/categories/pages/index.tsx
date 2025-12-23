@@ -1,4 +1,4 @@
-import Link from "next/link";
+import CategoryTag from "@/components/CategoryTag";
 import { getAllCategories } from "@/helpers/post";
 import styles from "./styles.module.css";
 
@@ -10,12 +10,7 @@ const CategoriesPage = (_props: CategoriesPageProps) => {
   return (
     <div className={styles.root}>
       {Object.keys(categoriesMap).map((category) => {
-        return (
-          <Link key={category} className={styles.category} href={`/category/${category}`}>
-            <span>{category}</span>
-            <span>{categoriesMap[category].length}</span>
-          </Link>
-        );
+        return <CategoryTag key={category} category={category} count={categoriesMap[category].length} />;
       })}
     </div>
   );

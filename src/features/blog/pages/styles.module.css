@@ -1,3 +1,19 @@
 .post {
   padding: var(--page-padding);
 }
+
+.title {
+  text-align: center;
+}
+
+.metadata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.published_at {
+  color: var(--secondary-text-color);
+}

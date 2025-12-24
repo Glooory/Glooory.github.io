@@ -7,6 +7,7 @@ import "./global.css";
 import { ReactNode } from "react";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import Header from "@/components/Header";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import CustomMantineProvider from "@/lib/theme/CustomMantineProvider";
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <CustomMantineProvider>
           <Header />
           {children}
+          <ScrollToTop />
         </CustomMantineProvider>
       </body>
     </html>

@@ -19,7 +19,11 @@ const withMDX = createMDX({
   extension: /\.(md|mdx)$/,
   options: {
     remarkPlugins: ["remark-frontmatter", "remark-gfm"],
-    rehypePlugins: [["rehype-pretty-code", rehypePrettyCodeOptions]],
+    rehypePlugins: [
+      ["rehype-pretty-code", rehypePrettyCodeOptions],
+      "rehype-slug",
+      ["rehype-autolink-headings", { behavior: "wrap" }],
+    ],
   },
 });
 

@@ -1,7 +1,10 @@
 import dayjs from "dayjs";
 import fs from "fs";
 import path from "path";
+import Slugger from "github-slugger";
 import matter from "gray-matter";
+import { remark } from "remark";
+import { visit } from "unist-util-visit";
 import { postExtensionRegex } from "@/constants/file";
 import { Post, PostMetadata } from "@/type";
 
@@ -85,4 +88,26 @@ export const getAllCategories = (): Record<string, Post[]> => {
   );
 
   return categoriesMap;
+};
+
+export const getHeadings = async (content: string) => {
+  const headings: { text: string; id: string; depth: number }[] = [];
+  const slugger = new Slugger();
+
+  await remark()
+    .use(() => (tree) => {
+      visit(tree, "heading", (node: any) => {
+        if (node.depth === 2 || node.depth === 3) {
+          const text = node.children
+            .filter((child: any) => child.type === "text")
+            .map((child: any) => child.value)
+            .join("");
+          const id = slugger.slug(text);
+          headings.push({ text, id, depth: node.depth });
+        }
+      });
+    })
+    .process(content);
+
+  return headings;
 };

@@ -1,4 +1,6 @@
 import CategoryTag from "@/components/CategoryTag";
+import TableOfContents from "@/components/TableOfContents";
+import { getHeadings } from "@/helpers/post";
 import { Post } from "@/type";
 import { formatDate } from "@/utils/date";
 import styles from "./styles.module.css";
@@ -12,19 +14,23 @@ const BlogPage = async (props: BlogPageProps) => {
   const { postPath, post } = props;
 
   const { default: PostContent } = await import(`@/posts/${postPath}`);
+  const headings = await getHeadings(post.content);
 
   return (
-    <article className={styles.post}>
-      <h1 className={styles.title}>{post.title}</h1>
-      <div className={styles.metadata}>
-        <span>{formatDate(post.publishedAt)}</span>
-        <span>/</span>
-        {post.categories.map((category, index) => (
-          <CategoryTag key={index} category={category} />
-        ))}
-      </div>
-      <PostContent />
-    </article>
+    <>
+      <article className={styles.post}>
+        <h1 className={styles.title}>{post.title}</h1>
+        <div className={styles.metadata}>
+          <span>{formatDate(post.publishedAt)}</span>
+          <span>/</span>
+          {post.categories.map((category, index) => (
+            <CategoryTag key={index} category={category} />
+          ))}
+        </div>
+        <PostContent />
+      </article>
+      <TableOfContents headings={headings} />
+    </>
   );
 };
 

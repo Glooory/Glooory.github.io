@@ -5,7 +5,7 @@ export interface PostMetadata {
   publishedAt: string;
   updatedAt?: string;
   tags?: string[];
-  categories: string[];
+  categories?: string[];
 }
 
 export type Post = Pick<GrayMatterFile<string>, "content" | "excerpt"> &

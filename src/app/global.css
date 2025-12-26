@@ -214,6 +214,10 @@ a:focus-visible {
   border-radius: 2px;
 }
 
+img {
+  max-width: 100%;
+}
+
 ul,
 ol {
   margin-bottom: var(--space-md);

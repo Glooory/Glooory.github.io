@@ -6,7 +6,10 @@ import { Post } from "@/type";
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const posts: Post[] = getAllPosts();
-  const post = posts.find((post) => post.encodedFileName === slug || post.fileName === slug);
+  const decodedSlug = decodeURIComponent(slug);
+  const post = posts.find(
+    (post) => post.encodedFileName === slug || post.fileName === slug || post.fileName === decodedSlug
+  );
 
   if (!post) {
     return notFound();
@@ -17,7 +20,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
 export function generateStaticParams() {
   const posts = getAllPosts();
-  return [...posts.map((post) => ({ slug: post.encodedFileName })), ...posts.map((post) => ({ slug: post.fileName }))];
+  return posts.map((post) => ({ slug: post.fileName }));
 }
 
 export const dynamicParams = false;

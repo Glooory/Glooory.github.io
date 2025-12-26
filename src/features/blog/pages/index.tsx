@@ -22,8 +22,8 @@ const BlogPage = async (props: BlogPageProps) => {
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.metadata}>
           <span>{formatDate(post.publishedAt)}</span>
-          <span>/</span>
-          {post.categories.map((category, index) => (
+          {!!post.categories?.length && <span>/</span>}
+          {post.categories?.map((category, index) => (
             <CategoryTag key={index} category={category} />
           ))}
         </div>

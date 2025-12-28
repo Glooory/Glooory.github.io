@@ -50,3 +50,7 @@
 .depth_3 {
   padding-left: var(--space-md);
 }
+
+.depth_4 {
+  padding-left: var(--space-xl);
+}

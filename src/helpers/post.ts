@@ -97,7 +97,7 @@ export const getHeadings = async (content: string) => {
   await remark()
     .use(() => (tree) => {
       visit(tree, "heading", (node: any) => {
-        if (node.depth === 2 || node.depth === 3) {
+        if (node.depth >= 2 && node.depth <= 4) {
           const text = node.children
             .filter((child: any) => child.type === "text")
             .map((child: any) => child.value)

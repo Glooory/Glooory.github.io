@@ -22,7 +22,12 @@ const TableOfContents = ({ headings }: TableOfContentsProps) => {
         <div className={styles.title}>目录</div>
         <ul className={styles.list}>
           {headings.map((heading) => (
-            <li key={heading.id} className={`${styles.item} ${heading.depth === 3 ? styles.depth_3 : ""}`}>
+            <li
+              key={heading.id}
+              className={`${styles.item} ${heading.depth === 3 ? styles.depth_3 : ""} ${
+                heading.depth === 4 ? styles.depth_4 : ""
+              }`}
+            >
               <Link href={`#${heading.id}`} className={styles.link}>
                 {heading.text}
               </Link>

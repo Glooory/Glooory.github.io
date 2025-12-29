@@ -29,7 +29,7 @@ const PostsTimeline = (props: PostsTimelineProps) => {
               <div className={styles.posts}>
                 {posts.map((post) => {
                   return (
-                    <div key={post.title} className={styles.post}>
+                    <div key={`${post.title}-${post.extension}`} className={styles.post}>
                       <a href={`/blog/${post.fileName}`}>
                         <div>
                           <span className={styles.date}>{dayjs(post.publishedAt).format("MM-DD")}</span>

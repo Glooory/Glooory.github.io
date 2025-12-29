@@ -1,7 +1,23 @@
+import { Metadata } from "next";
 import { CategoryPostsPage } from "@/features/category/pages";
 import { getAllCategories } from "@/helpers/post";
 
-export default async function Page({ params }: { params: Promise<{ category: string }> }) {
+type Props = {
+  params: Promise<{ category: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { category } = await params;
+  const decodedSlug = decodeURIComponent(category);
+
+  return {
+    alternates: {
+      canonical: `/category/${decodedSlug}`,
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
   const { category } = await params;
 
   return <CategoryPostsPage category={decodeURIComponent(category)} />;
@@ -9,9 +25,13 @@ export default async function Page({ params }: { params: Promise<{ category: str
 
 export function generateStaticParams() {
   const categories: string[] = Object.keys(getAllCategories());
-  return categories.map((category) => ({
+  const encodedCategories: { category: string }[] = categories.map((category) => ({
+    category: encodeURIComponent(category),
+  }));
+  const nonEncodedCategories: { category: string }[] = categories.map((category) => ({
     category,
   }));
+  return [...encodedCategories, ...nonEncodedCategories];
 }
 
 export const dynamicParams = false;

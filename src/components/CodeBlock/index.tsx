@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 
 interface CodeBlockProps {
@@ -11,6 +11,23 @@ interface CodeBlockProps {
 export function CodeBlock({ children, className, ...props }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const preRef = useRef<HTMLPreElement>(null);
+
+  useEffect(() => {
+    if (!preRef.current) {
+      return;
+    }
+
+    const codeEl = preRef.current.querySelector("code");
+    if (!codeEl) {
+      return;
+    }
+
+    const lines = codeEl.querySelectorAll("[data-line]");
+    const lineCount = lines.length;
+    const digits = lineCount.toString().length;
+
+    preRef.current.style.setProperty("--line-number-width", `${digits}ch`);
+  }, [children]);
 
   const handleCopy = async () => {
     if (!preRef.current) {

@@ -23,8 +23,12 @@ export const PrimerTokens = {
       emphasis: "#6e7781",
     },
     code: {
-      bg: "#f6f8fa",
       text: "#24292f",
+      bg: "#f6f8fa",
+      highlightLine: "#1f2328",
+      highlightLineBg: "#fffbdd",
+      highlightWordBg: "#dbedff",
+      highlightLineBorderColor: "#ffd33d",
     },
     success: {
       fg: "#1a7f37",
@@ -57,8 +61,12 @@ export const PrimerTokens = {
       emphasis: "#6e7781",
     },
     code: {
-      bg: "#2d333b",
       text: "#adbac7",
+      bg: "#2d333b",
+      highlightLine: "#adbac7",
+      highlightLineBg: "rgba(187, 128, 9, 0.15)",
+      highlightWordBg: "rgba(56, 139, 253, 0.4)",
+      highlightLineBorderColor: "#d29922",
     },
     success: {
       fg: "#57ab5a",

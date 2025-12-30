@@ -12,7 +12,10 @@ const rehypePrettyCodeOptions = {
     dark: "github-dark-dimmed",
   },
   keepBackground: false,
-  defaultLanguage: "plaintext",
+  defaultLang: {
+    block: "plaintext",
+    inline: "plaintext",
+  },
 };
 
 const withMDX = createMDX({

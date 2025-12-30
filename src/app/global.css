@@ -268,7 +268,7 @@ pre {
   background-color: var(--code-bg);
   border: 1px solid var(--border-default);
   border-radius: 6px;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 0.9em;
@@ -369,4 +369,38 @@ blockquote {
 
 figure[data-rehype-pretty-code-figure] {
   margin: 0;
+}
+
+pre > code {
+  counter-reset: line;
+}
+
+pre > code > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: var(--line-number-width, 2ch);
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--fg-subtle);
+  font-size: 0.75em;
+}
+
+[data-line] {
+  display: inline-block;
+  width: 100%;
+  padding: 0 0.5rem;
+  margin: 0 -0.5rem;
+}
+
+[data-highlighted-line] {
+  background-color: var(--code-highlight-line-bg);
+  border-left: 2px solid var(--code-highlight-line-border-color);
+  padding-left: calc(0.5rem - 2px);
+}
+
+[data-highlighted-chars] {
+  background-color: var(--code-highlight-word-bg);
+  border-radius: 2px;
+  padding: 0.1em 0.2em;
 }

@@ -8,9 +8,10 @@
 }
 
 .post {
+  position: relative;
+  width: fit-content;
   padding: var(--space-sm) var(--space-md);
   border-left: 1.4px dashed var(--border-color);
-  position: relative;
 }
 
 .post::before {
@@ -31,7 +32,14 @@
   }
 }
 
+.post-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 .date {
+  font-family: var(--font-mono);
   color: var(--secondary-text-color);
 }
 

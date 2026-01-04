@@ -1,16 +1,16 @@
 import CategoryTag from "@/components/CategoryTag";
-import { getAllCategories } from "@/helpers/post";
+import { getBlogsGroupedByCategory } from "@/helpers/blog";
 import styles from "./styles.module.css";
 
 export interface CategoriesPageProps {}
 
 const CategoriesPage = (_props: CategoriesPageProps) => {
-  const categoriesMap = getAllCategories();
+  const blogsGroupedByCategory = getBlogsGroupedByCategory();
 
   return (
     <div className={styles.root}>
-      {Object.keys(categoriesMap).map((category) => {
-        return <CategoryTag key={category} category={category} count={categoriesMap[category].length} />;
+      {Object.keys(blogsGroupedByCategory).map((category) => {
+        return <CategoryTag key={category} category={category} count={blogsGroupedByCategory[category].length} />;
       })}
     </div>
   );

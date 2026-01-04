@@ -9,11 +9,12 @@ export interface PostsTimelineProps {
     root?: string;
   };
   title?: string;
+  pathSegment: string;
   posts: Post[];
 }
 
 const PostsTimeline = (props: PostsTimelineProps) => {
-  const { classNames, title, posts } = props;
+  const { classNames, title, pathSegment, posts } = props;
   const postsGroupedByYear = groupPostsByYear(posts);
 
   return (
@@ -30,7 +31,7 @@ const PostsTimeline = (props: PostsTimelineProps) => {
                 {posts.map((post) => {
                   return (
                     <div key={`${post.title}-${post.extension}`} className={styles.post}>
-                      <a href={`/blog/${post.fileName}`}>
+                      <a href={`/${pathSegment}/${post.fileName}`}>
                         <div className={styles["post-title"]}>
                           <span className={styles.date}>{dayjs(post.publishedAt).format("MM-DD")}</span>
                           <span className={styles.slash}> / </span>

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import BlogPage from "@/features/blog/pages";
-import { getAllBlogs } from "@/helpers/blog";
+import WorkPage from "@/features/work/pages";
+import { getAllWorks } from "@/helpers/work";
 import { Post } from "@/type";
 
 type Props = {
@@ -14,14 +14,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     alternates: {
-      canonical: `/blog/${decodedSlug}`,
+      canonical: `/work/${decodedSlug}`,
     },
   };
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const posts: Post[] = getAllBlogs();
+  const posts: Post[] = getAllWorks();
   const decodedSlug = decodeURIComponent(slug);
   const post = posts.find(
     (post) => post.encodedFileName === slug || post.fileName === slug || post.fileName === decodedSlug
@@ -31,11 +31,11 @@ export default async function Page({ params }: Props) {
     return notFound();
   }
 
-  return <BlogPage postPath={post.filePath} post={post} />;
+  return <WorkPage postPath={post.filePath} post={post} />;
 }
 
 export function generateStaticParams() {
-  const posts = getAllBlogs();
+  const posts = getAllWorks();
   const encodedPosts: { slug: string }[] = posts.map((post) => ({ slug: post.encodedFileName }));
   const nonEncodedPosts: { slug: string }[] = posts.map((post) => ({ slug: post.fileName }));
   return [...encodedPosts, ...nonEncodedPosts];

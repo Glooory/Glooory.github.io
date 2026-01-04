@@ -5,15 +5,15 @@ import { Post } from "@/type";
 import { formatDate } from "@/utils/date";
 import styles from "./styles.module.css";
 
-export interface BlogPageProps {
+export interface WorkPageProps {
   postPath: string;
   post: Post;
 }
 
-const BlogPage = async (props: BlogPageProps) => {
+const WorkPage = async (props: WorkPageProps) => {
   const { postPath, post } = props;
 
-  const { default: PostContent } = await import(`@/data/blogs/${postPath}`);
+  const { default: PostContent } = await import(`@/data/works/${postPath}`);
   const headings = await getHeadings(post.content);
 
   return (
@@ -34,4 +34,4 @@ const BlogPage = async (props: BlogPageProps) => {
   );
 };
 
-export default BlogPage;
+export default WorkPage;

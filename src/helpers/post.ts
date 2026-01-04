@@ -8,9 +8,7 @@ import { visit } from "unist-util-visit";
 import { postExtensionRegex } from "@/constants/file";
 import { Post, PostMetadata } from "@/type";
 
-const postsRelativePath = "src/posts";
-
-export function getAllPosts(isNewestFirst = true): Post[] {
+export function getAllPosts(postsRelativePath: string, isNewestFirst = true): Post[] {
   const postPaths = fs.readdirSync(path.join(process.cwd(), postsRelativePath));
 
   const posts: Post[] = postPaths
@@ -67,13 +65,13 @@ export const groupPostsByYear = (posts: Post[], isNewestFirst = true): Record<st
   return groupedPosts;
 };
 
-export const getPostsGroupedByYear = (isNewestFirst = true): Record<string, Post[]> => {
-  const posts = getAllPosts();
+export const getPostsGroupedByYear = (relativePath: string, isNewestFirst = true): Record<string, Post[]> => {
+  const posts = getAllPosts(relativePath, isNewestFirst);
   return groupPostsByYear(posts, isNewestFirst);
 };
 
-export const getAllCategories = (): Record<string, Post[]> => {
-  const posts = getAllPosts();
+export const getPostsGroupedByCategory = (relativePath: string): Record<string, Post[]> => {
+  const posts = getAllPosts(relativePath);
   const categoriesMap = posts.reduce(
     (acc, post) => {
       (post?.categories || []).forEach((category) => {

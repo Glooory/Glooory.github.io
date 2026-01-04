@@ -1,1 +1,1 @@
-export { HomePage as default } from "@/features/home/pages";
+export { BlogsPage as default } from "@/features/blogs/pages";

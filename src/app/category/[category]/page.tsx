@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { CategoryPostsPage } from "@/features/category/pages";
-import { getAllCategories } from "@/helpers/post";
+import { getBlogsGroupedByCategory } from "@/helpers/blog";
 
 type Props = {
   params: Promise<{ category: string }>;
@@ -24,7 +24,7 @@ export default async function Page({ params }: Props) {
 }
 
 export function generateStaticParams() {
-  const categories: string[] = Object.keys(getAllCategories());
+  const categories: string[] = Object.keys(getBlogsGroupedByCategory());
   const encodedCategories: { category: string }[] = categories.map((category) => ({
     category: encodeURIComponent(category),
   }));

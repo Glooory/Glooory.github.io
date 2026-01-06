@@ -1,4 +1,11 @@
+.root-container {
+  height: 100dvh;
+  max-width: var(--content-width-with-padding);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .content {
-  max-width: var(--max-content-width);
-  margin: auto;
+  flex: 1;
 }

@@ -1,0 +1,27 @@
+import styles from "./styles.module.css";
+
+export interface FooterProps {}
+
+const Footer = () => {
+  return (
+    <footer className={styles.footer}>
+      <div>
+        © 2019 - 2025 Glooory 本站内容采用{" "}
+        <a
+          href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CC BY-NC-SA 4.0
+        </a>{" "}
+        许可协议，代码采用{" "}
+        <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">
+          MIT
+        </a>{" "}
+        许可协议。
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

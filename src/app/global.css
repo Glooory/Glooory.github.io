@@ -295,11 +295,6 @@ blockquote {
   font-style: italic;
 }
 
-.container {
-  max-width: var(--content-width-with-padding);
-  margin-inline: auto;
-}
-
 .text-secondary {
   color: var(--secondary-text-color);
 }

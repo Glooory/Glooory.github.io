@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { IconMoon, IconProps, IconSun } from "@tabler/icons-react";
 import clsx from "clsx";
-import { Button, MantineColorScheme, useMantineColorScheme } from "@mantine/core";
+import { Button, useMantineColorScheme } from "@mantine/core";
 import styles from "./styles.module.css";
 
 export interface ColorSchemeButtonProps {
@@ -16,25 +15,12 @@ export interface ColorSchemeButtonProps {
 const ColorSchemeButton = (props: ColorSchemeButtonProps) => {
   const { iconProps, classNames } = props;
 
-  const [rendered, setRendered] = useState(false);
-
-  const { colorScheme, toggleColorScheme, setColorScheme } = useMantineColorScheme();
-
-  useEffect(() => {
-    const mode = document.documentElement.getAttribute("data-mantine-color-scheme");
-    if (colorScheme !== mode) {
-      setColorScheme(mode as MantineColorScheme);
-    }
-    setRendered(true);
-  }, []);
+  const { toggleColorScheme } = useMantineColorScheme();
 
   return (
     <Button variant="transparent" className={clsx(styles.button, classNames?.button)} onClick={toggleColorScheme}>
-      {!rendered || colorScheme === "light" ? (
-        <IconSun size={24} {...iconProps} />
-      ) : (
-        <IconMoon size={24} {...iconProps} />
-      )}
+      <IconSun size={24} className={styles["color-scheme-icon__sun"]} {...iconProps} />
+      <IconMoon size={24} className={styles["color-scheme-icon__moon"]} {...iconProps} />
     </Button>
   );
 };

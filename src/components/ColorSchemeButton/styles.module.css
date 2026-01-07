@@ -7,3 +7,19 @@
   justify-content: center;
   color: var(--primary-text-color);
 }
+
+.color-scheme-icon__sun {
+  display: block;
+}
+
+.color-scheme-icon__moon {
+  display: none;
+}
+
+[data-mantine-color-scheme="dark"] .color-scheme-icon__sun {
+  display: none;
+}
+
+[data-mantine-color-scheme="dark"] .color-scheme-icon__moon {
+  display: block;
+}

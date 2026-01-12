@@ -5,7 +5,7 @@ export interface FooterProps {}
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div>
+      <span>
         © 2019 - 2025 Glooory 本站内容采用{" "}
         <a
           href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
@@ -19,7 +19,7 @@ const Footer = () => {
           MIT
         </a>{" "}
         许可协议。
-      </div>
+      </span>
     </footer>
   );
 };

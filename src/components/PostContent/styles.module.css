@@ -15,3 +15,22 @@
   color: var(--secondary-text-color);
   font-size: var(--font-size-sm);
 }
+
+.date {
+  display: inline-flex;
+  column-gap: var(--space-sm);
+}
+
+@media (max-width: $mantine-breakpoint-xs) {
+  .date {
+    flex-direction: column;
+  }
+
+  .date-separator {
+    display: none;
+  }
+}
+
+.date > span {
+  flex-shrink: 0;
+}

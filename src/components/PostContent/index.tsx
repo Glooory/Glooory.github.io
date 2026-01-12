@@ -22,9 +22,14 @@ const PostContent = async (props: PostContentProps) => {
       <article className={styles.post}>
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles.metadata}>
-          <span>
-            {`发布于 ${formatDate(post.publishedAt)}`}
-            {post.updatedAt && ` · 更新于 ${formatDate(post.updatedAt)}`}
+          <span className={styles.date}>
+            <span>{`发布于 ${formatDate(post.publishedAt)}`}</span>
+            {post.updatedAt && (
+              <>
+                <span className={styles["date-separator"]}> · </span>
+                <span>{`更新于 ${formatDate(post.updatedAt)}`}</span>
+              </>
+            )}
           </span>
           {!!post.categories?.length && <span>/</span>}
           {post.categories?.map((category, index) => (

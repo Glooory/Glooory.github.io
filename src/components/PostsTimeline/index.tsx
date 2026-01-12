@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import clsx from "clsx";
 import { groupPostsByYear } from "@/helpers/post";
 import { Post } from "@/type";
+import EmptyData from "../EmptyData";
 import styles from "./styles.module.css";
 
 export interface PostsTimelineProps {
@@ -16,6 +17,10 @@ export interface PostsTimelineProps {
 const PostsTimeline = (props: PostsTimelineProps) => {
   const { classNames, title, pathSegment, posts } = props;
   const postsGroupedByYear = groupPostsByYear(posts);
+
+  if (posts.length === 0) {
+    return <EmptyData />;
+  }
 
   return (
     <div className={clsx(styles.root, classNames?.root)}>

@@ -14,8 +14,20 @@ import { appConfig } from "../../app.config";
 import styles from "./styles.module.css";
 
 export const metadata = {
-  title: appConfig.title,
+  metadataBase: new URL(appConfig.baseUrl),
+  title: {
+    default: appConfig.title,
+    template: `%s | ${appConfig.title}`,
+  },
   description: appConfig.description,
+  openGraph: {
+    title: appConfig.title,
+    description: appConfig.description,
+    url: appConfig.baseUrl,
+    siteName: appConfig.title,
+    locale: "zh_CN",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

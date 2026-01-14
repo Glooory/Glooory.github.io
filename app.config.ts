@@ -4,4 +4,5 @@ export const appConfig = {
   description: "Where I writes",
   author: "Glooory",
   since: "2019",
+  baseUrl: "https://glooory.github.io",
 };

@@ -1,5 +1,5 @@
 export default async function Page() {
-  const post = await import(`@/features/about/pages/index.mdx`);
+  const post = await import(`@content/about.mdx`);
   const { default: Post } = post;
 
   return (

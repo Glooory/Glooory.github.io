@@ -14,7 +14,7 @@ export interface PostContentProps {
 const PostContent = async (props: PostContentProps) => {
   const { post, type, postPath } = props;
 
-  const { default: PostContentData } = await import(`@/data/${type}s/${postPath}`);
+  const { default: PostContentData } = await import(`@content/${type}s/${postPath}`);
   const headings = await getHeadings(post.content);
 
   return (

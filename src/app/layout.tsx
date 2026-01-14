@@ -10,11 +10,12 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import CustomMantineProvider from "@/lib/theme/CustomMantineProvider";
+import { appConfig } from "../../app.config";
 import styles from "./styles.module.css";
 
 export const metadata = {
-  title: "Glooory's blog",
-  description: "Where I writes",
+  title: appConfig.title,
+  description: appConfig.description,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -1,3 +1,4 @@
+import { appConfig } from "../../../app.config";
 import styles from "./styles.module.css";
 
 export interface FooterProps {}
@@ -6,7 +7,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <span>
-        © 2019 - 2025 Glooory 本站内容采用{" "}
+        © {appConfig.since} - {new Date().getFullYear()} {appConfig.author} 本站内容采用{" "}
         <a
           href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
           target="_blank"

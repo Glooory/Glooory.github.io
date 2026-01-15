@@ -35,6 +35,9 @@ export default withBundleAnalyzer(
     output: "export",
     reactStrictMode: false,
     pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+    images: {
+      unoptimized: true,
+    },
     experimental: {
       optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     },

@@ -1,5 +1,6 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
+import { appConfig } from "./app.config.js";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
@@ -30,6 +31,9 @@ const withMDX = createMDX({
   },
 });
 
+const isProd = process.env.NODE_ENV === "production";
+const basePath = isProd ? new URL(appConfig.baseUrl).pathname : "";
+
 export default withBundleAnalyzer(
   withMDX({
     output: "export",
@@ -38,6 +42,7 @@ export default withBundleAnalyzer(
     images: {
       unoptimized: true,
     },
+    basePath,
     experimental: {
       optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
     },

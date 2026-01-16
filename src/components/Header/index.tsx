@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import clsx from "clsx";
 import { UnstyledButton } from "@mantine/core";
 import { appConfig } from "../../../app.config";
@@ -18,9 +19,9 @@ const Header = (_props: HeaderProps) => {
 
   const navLinks = (
     <>
-      <a href="/categories">Categories</a>
-      <a href="/works">Made</a>
-      <a href="/about">About</a>
+      <Link href="/categories">Categories</Link>
+      <Link href="/works">Made</Link>
+      <Link href="/about">About</Link>
     </>
   );
 
@@ -29,7 +30,7 @@ const Header = (_props: HeaderProps) => {
       <header className={clsx(styles.header, { [styles["header--menu-open"]]: isMenuOpen })}>
         <div className={styles.header__content}>
           <h5 className={styles.header__title}>
-            <a href="/">{appConfig.siteName}</a>
+            <Link href="/">{appConfig.siteName}</Link>
           </h5>
           <nav className={styles.header__nav_desktop}>{navLinks}</nav>
           <ColorSchemeButton classNames={{ button: styles["color-scheme__icon"] }} />

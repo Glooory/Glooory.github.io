@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import Link from "next/link";
 import clsx from "clsx";
 import { groupPostsByYear } from "@/helpers/post";
 import { Post } from "@/type";
@@ -36,13 +37,13 @@ const PostsTimeline = (props: PostsTimelineProps) => {
                 {posts.map((post) => {
                   return (
                     <div key={`${post.title}-${post.extension}`} className={styles.post}>
-                      <a href={`/${pathSegment}/${post.fileName}`}>
+                      <Link href={`/${pathSegment}/${post.fileName}`}>
                         <div className={styles["post-title"]}>
                           <span className={styles.date}>{dayjs(post.publishedAt).format("MM-DD")}</span>
                           <span className={styles.slash}> / </span>
                           {post.title}
                         </div>
-                      </a>
+                      </Link>
                     </div>
                   );
                 })}

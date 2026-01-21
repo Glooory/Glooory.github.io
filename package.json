@@ -16,7 +16,10 @@
     "prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
     "prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "test": "npx next typegen && npm run prettier:check && npm run lint && npm run typecheck && npm run vitest"
+    "test": "npx next typegen && npm run prettier:check && npm run lint && npm run typecheck && npm run vitest",
+    "new": "node ./scripts/newPost.mjs blog",
+    "new:post": "node ./scripts/newPost.mjs blog",
+    "new:work": "node ./scripts/newPost.mjs work"
   },
   "dependencies": {
     "@mantine/core": "8.3.6",

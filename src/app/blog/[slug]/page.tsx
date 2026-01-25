@@ -23,13 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: post.title,
-    description: post.content.slice(0, 160),
+    description: post.excerpt,
     alternates: {
       canonical: `/blog/${decodedSlug}`,
     },
     openGraph: {
       title: post.title,
-      description: post.content.slice(0, 160),
+      description: post.excerpt,
       type: "article",
       publishedTime: post.publishedAt,
       authors: [`${appConfig.author}`],

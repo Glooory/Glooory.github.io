@@ -5,9 +5,10 @@ It's very simple and clean. [preview](https://glooory.github.io/nextjs-mdx-manti
 ## Getting Started
 
 1. Fork or clone the repo.
-2. Install dependencies: `npm install`
-3. Run development server: `npm run dev`
-4. Build for production : `npm run build`
+2. Change the configurations in `app.config.mjs`
+3. Install dependencies: `npm install`
+4. Run development server: `npm run dev`
+5. Build for production : `npm run build`
 
 ## Writing Content
 

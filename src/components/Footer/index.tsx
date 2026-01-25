@@ -1,4 +1,4 @@
-import { appConfig } from "../../../app.config";
+import { appConfig } from "../../../app.config.mjs";
 import styles from "./styles.module.css";
 
 export interface FooterProps {}

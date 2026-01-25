@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import BlogPage from "@/features/blog/pages";
 import { getAllBlogs } from "@/helpers/blog";
 import { Post } from "@/type";
-import { appConfig } from "../../../../app.config";
+import { appConfig } from "../../../../app.config.mjs";
 
 type Props = {
   params: Promise<{ slug: string }>;

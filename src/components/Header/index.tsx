@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import clsx from "clsx";
 import { UnstyledButton } from "@mantine/core";
-import { appConfig } from "../../../app.config";
+import { appConfig } from "../../../app.config.mjs";
 import ColorSchemeButton from "../ColorSchemeButton";
 import styles from "./styles.module.css";
 

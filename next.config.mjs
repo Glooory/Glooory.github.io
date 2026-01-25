@@ -1,6 +1,6 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
-import { appConfig } from "./app.config.js";
+import { appConfig } from "./app.config.mjs";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",

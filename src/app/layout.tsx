@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import CustomMantineProvider from "@/lib/theme/CustomMantineProvider";
-import { appConfig } from "../../app.config";
+import { appConfig } from "../../app.config.mjs";
 import styles from "./styles.module.css";
 
 export const metadata = {

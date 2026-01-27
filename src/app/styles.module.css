@@ -1,5 +1,5 @@
 .root-container {
-  height: 100dvh;
+  min-height: 100dvh;
   max-width: var(--content-width-with-padding);
   margin-inline: auto;
   display: flex;

@@ -32,6 +32,10 @@
   }
 }
 
+.post a {
+  color: inherit;
+}
+
 .post-title {
   display: flex;
   align-items: center;

@@ -9,6 +9,11 @@
   backdrop-filter: blur(8px);
 }
 
+.header a,
+.header__nav_mobile a {
+  color: var(--text-primary);
+}
+
 .header__content {
   max-width: var(--max-content-width);
   height: var(--header-height);

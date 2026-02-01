@@ -1,4 +1,5 @@
 import { getHeadings } from "@/helpers/post";
+import { useMDXComponents } from "@/mdx-components";
 import { Post } from "@/type";
 import { formatDate } from "@/utils/date";
 import CategoryTag from "../CategoryTag";
@@ -16,6 +17,7 @@ const PostContent = async (props: PostContentProps) => {
 
   const { default: PostContentData } = await import(`@content/${type}s/${postPath}`);
   const headings = await getHeadings(post.content);
+  const mdxComponents = useMDXComponents();
 
   return (
     <>
@@ -36,7 +38,7 @@ const PostContent = async (props: PostContentProps) => {
             <CategoryTag key={index} category={category} />
           ))}
         </div>
-        <PostContentData />
+        <PostContentData components={mdxComponents} />
       </article>
       <TableOfContents headings={headings} />
     </>

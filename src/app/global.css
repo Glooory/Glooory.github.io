@@ -372,6 +372,10 @@ pre > code > [data-line]::before {
   padding-left: calc(0.5rem - 2px);
 }
 
+pre > code > [data-highlighted-line]::before {
+  background-color: var(--code-highlight-line-bg);
+}
+
 [data-highlighted-chars] {
   background-color: var(--code-highlight-word-bg);
   border-radius: 2px;

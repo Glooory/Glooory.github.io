@@ -19,9 +19,9 @@ const Header = (_props: HeaderProps) => {
 
   const navLinks = (
     <>
-      <Link href="/categories">Categories</Link>
-      <Link href="/works">Made</Link>
-      <Link href="/about">About</Link>
+      <Link href="/categories">分类</Link>
+      <Link href="/works">垃圾</Link>
+      <Link href="/about">关于</Link>
     </>
   );
 

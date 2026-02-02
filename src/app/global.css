@@ -315,6 +315,8 @@ pre {
   --line-number-horizontal-padding: 0.375rem;
   --line-number-right-margin: 0.75rem;
   --line-number-background: var(--code-bg);
+  --highlight-line-left-border-width: 2px;
+  --highlight-line-left-border-color: transparent;
   background-color: var(--code-bg);
   border: 1px solid var(--border-default);
   border-radius: 6px;
@@ -347,18 +349,23 @@ pre > code [data-line] {
   width: 100%;
   padding: 0;
   margin: 0 -0.5rem;
+  border-left: var(--highlight-line-left-border-width) solid var(--highlight-line-left-border-color);
 }
 
 pre > code > [data-line]::before {
   counter-increment: line;
   content: counter(line);
-  width: calc(var(--line-number-width, 2ch) + calc(var(--line-number-horizontal-padding) * 2));
+  width: calc(
+    var(--line-number-width, 2ch) + calc(var(--line-number-horizontal-padding) * 2) -
+      var(--highlight-line-left-border-width)
+  );
   height: 100%;
   display: inline-flex;
   justify-content: flex-end;
   align-items: center;
   line-height: 1;
   padding: 0 var(--line-number-horizontal-padding);
+  padding-left: calc(var(--line-number-horizontal-padding) - var(--highlight-line-left-border-width));
   margin-right: var(--line-number-right-margin);
   text-align: center;
   color: var(--fg-subtle);
@@ -367,12 +374,11 @@ pre > code > [data-line]::before {
 }
 
 [data-highlighted-line] {
+  --highlight-line-left-border-color: var(--code-highlight-line-border-color);
   background-color: var(--code-highlight-line-bg);
-  border-left: 2px solid var(--code-highlight-line-border-color);
-  padding-left: calc(0.5rem - 2px);
 }
 
-pre > code > [data-highlighted-line]::before {
+pre > code [data-highlighted-line]::before {
   background-color: var(--code-highlight-line-bg);
 }
 

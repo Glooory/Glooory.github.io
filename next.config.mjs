@@ -27,7 +27,12 @@ const withMDX = createMDX({
       ["rehype-pretty-code", rehypePrettyCodeOptions],
       "rehype-slug",
       ["rehype-autolink-headings", { behavior: "wrap" }],
-      "rehype-raw",
+      [
+        "rehype-raw",
+        {
+          passThrough: ["mdxjsEsm", "mdxFlowExpression", "mdxJsxFlowElement", "mdxJsxTextElement", "mdxTextExpression"],
+        },
+      ],
     ],
   },
 });

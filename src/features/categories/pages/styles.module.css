@@ -1,5 +1,5 @@
 .root {
-  padding: var(--space-lg);
+  padding: var(--page-padding);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

@@ -111,6 +111,18 @@
     margin-right: var(--space-md);
   }
 
+  .header__nav_mobile_backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: calc(var(--z-index-header) - 2);
+    background-color: transparent;
+    transform: translateY(-100%);
+    transition: all 0.3s ease;
+  }
+
   .header__nav_mobile {
     display: flex;
     position: fixed;
@@ -130,6 +142,7 @@
     backdrop-filter: blur(8px);
   }
 
+  .header__nav_mobile_backdrop--open,
   .header__nav_mobile--open {
     transform: translateY(0);
   }

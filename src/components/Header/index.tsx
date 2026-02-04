@@ -17,11 +17,23 @@ const Header = (_props: HeaderProps) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const navLinks = (
+  const onNavLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
+  const renderNavLink = (href: string, label: string) => {
+    return (
+      <Link href={href} onClick={onNavLinkClick}>
+        {label}
+      </Link>
+    );
+  };
+
+  const renderNavLinks = () => (
     <>
-      <Link href="/categories">分类</Link>
-      <Link href="/works">垃圾</Link>
-      <Link href="/about">关于</Link>
+      {renderNavLink("/categories", "分类")}
+      {renderNavLink("/works", "垃圾")}
+      {renderNavLink("/about", "关于")}
     </>
   );
 
@@ -29,10 +41,8 @@ const Header = (_props: HeaderProps) => {
     <>
       <header className={clsx(styles.header, { [styles["header--menu-open"]]: isMenuOpen })}>
         <div className={styles.header__content}>
-          <h5 className={styles.header__title}>
-            <Link href="/">{appConfig.siteName}</Link>
-          </h5>
-          <nav className={styles.header__nav_desktop}>{navLinks}</nav>
+          <h5 className={styles.header__title}>{renderNavLink("/", appConfig.siteName)}</h5>
+          <nav className={styles.header__nav_desktop}>{renderNavLinks()}</nav>
           <ColorSchemeButton classNames={{ button: styles["color-scheme__icon"] }} />
           <UnstyledButton
             className={clsx(styles.menu, { [styles.opened]: isMenuOpen })}
@@ -53,13 +63,25 @@ const Header = (_props: HeaderProps) => {
           </UnstyledButton>
         </div>
       </header>
-      <nav
-        className={clsx(styles.header__nav_mobile, {
-          [styles["header__nav_mobile--open"]]: isMenuOpen,
-        })}
-      >
-        {navLinks}
-      </nav>
+      <>
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label="Close menu"
+          className={clsx(styles.header__nav_mobile_backdrop, {
+            [styles["header__nav_mobile_backdrop--open"]]: isMenuOpen,
+          })}
+          onClick={toggleMenu}
+          onKeyDown={() => {}}
+        />
+        <nav
+          className={clsx(styles.header__nav_mobile, {
+            [styles["header__nav_mobile--open"]]: isMenuOpen,
+          })}
+        >
+          {renderNavLinks()}
+        </nav>
+      </>
     </>
   );
 };

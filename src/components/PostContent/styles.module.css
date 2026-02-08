@@ -1,0 +1,45 @@
+.post {
+  padding: var(--page-padding);
+}
+
+.post h1 a,
+.post h2 a,
+.post h3 a,
+.post h4 a,
+.post h5 a,
+.post h6 a {
+  color: inherit;
+}
+
+.title {
+  text-align: center;
+}
+
+.metadata {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  color: var(--secondary-text-color);
+  font-size: var(--font-size-sm);
+}
+
+.date {
+  display: inline-flex;
+  column-gap: var(--space-sm);
+}
+
+@media (max-width: $mantine-breakpoint-xs) {
+  .date {
+    flex-direction: column;
+  }
+
+  .date-separator {
+    display: none;
+  }
+}
+
+.date > span {
+  flex-shrink: 0;
+}

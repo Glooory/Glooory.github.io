@@ -1,0 +1,11 @@
+.root-container {
+  min-height: 100dvh;
+  max-width: var(--content-width-with-padding);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}

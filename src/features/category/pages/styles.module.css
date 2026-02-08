@@ -1,0 +1,4 @@
+.root {
+  padding: var(--page-padding);
+  padding-top: 0;
+}

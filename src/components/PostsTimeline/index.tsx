@@ -1,0 +1,58 @@
+import dayjs from "dayjs";
+import Link from "next/link";
+import clsx from "clsx";
+import { groupPostsByYear } from "@/helpers/post";
+import { Post } from "@/type";
+import EmptyData from "../EmptyData";
+import styles from "./styles.module.css";
+
+export interface PostsTimelineProps {
+  classNames?: {
+    root?: string;
+  };
+  title?: string;
+  pathSegment: string;
+  posts: Post[];
+}
+
+const PostsTimeline = (props: PostsTimelineProps) => {
+  const { classNames, title, pathSegment, posts } = props;
+  const postsGroupedByYear = groupPostsByYear(posts);
+
+  if (posts.length === 0) {
+    return <EmptyData />;
+  }
+
+  return (
+    <div className={clsx(styles.root, classNames?.root)}>
+      {title && <h4>{title}</h4>}
+      {Object.keys(postsGroupedByYear)
+        .sort((a, b) => Number(b) - Number(a))
+        .map((year) => {
+          const posts = postsGroupedByYear[year];
+          return (
+            <section key={year}>
+              <h4>{year}</h4>
+              <div className={styles.posts}>
+                {posts.map((post) => {
+                  return (
+                    <div key={`${post.title}-${post.extension}`} className={styles.post}>
+                      <Link href={`/${pathSegment}/${post.fileName}`}>
+                        <div className={styles["post-title"]}>
+                          <span className={styles.date}>{dayjs(post.publishedAt).format("MM-DD")}</span>
+                          <span className={styles.slash}> / </span>
+                          {post.title}
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+    </div>
+  );
+};
+
+export default PostsTimeline;

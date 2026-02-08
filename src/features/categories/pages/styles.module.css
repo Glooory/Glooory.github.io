@@ -1,0 +1,17 @@
+.root {
+  padding: var(--page-padding);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--bg-subtle);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+}

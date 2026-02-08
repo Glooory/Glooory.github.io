@@ -1,0 +1,58 @@
+.root {
+  max-width: var(--max-content-width);
+  margin: auto;
+}
+
+.posts {
+  padding-left: var(--space-md);
+}
+
+.post {
+  position: relative;
+  width: fit-content;
+  padding: var(--space-sm) var(--space-md);
+  border-left: 1.4px dashed var(--border-color);
+}
+
+.post::before {
+  position: absolute;
+  top: var(--space-md);
+  left: -6px;
+  z-index: 1;
+  display: block;
+  content: "";
+  background-color: var(--secondary-color);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+
+  @mixin dark {
+    border-color: var(--border-color);
+  }
+}
+
+.post a {
+  color: inherit;
+}
+
+.post-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.date {
+  font-family: var(--font-mono);
+  color: var(--secondary-text-color);
+}
+
+.slash {
+  color: var(--secondary-text-color);
+}
+
+@media (max-width: $mantine-breakpoint-sm) {
+  .blogs {
+    padding: 0 var(--space-lg);
+  }
+}

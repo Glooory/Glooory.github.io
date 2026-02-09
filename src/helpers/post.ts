@@ -12,7 +12,7 @@ export function getAllPosts(postsRelativePath: string, isNewestFirst = true): Po
   const postPaths = fs.readdirSync(path.join(process.cwd(), postsRelativePath));
 
   const posts: Post[] = postPaths
-    .filter((postPath) => postPath.endsWith(".md") || postPath.endsWith(".mdx"))
+    .filter((postPath) => (postPath.endsWith(".md") || postPath.endsWith(".mdx")) && postPath !== "README.md")
     .map((postPath) => {
       const source = fs.readFileSync(path.join(process.cwd(), postsRelativePath, postPath), "utf-8");
       const { data, content, excerpt } = matter<string, {}>(source, {

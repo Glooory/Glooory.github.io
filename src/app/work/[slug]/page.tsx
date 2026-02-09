@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import EmptyData from "@/components/EmptyData";
+import { NO_CONTENTS_YET_DUMMY_SLUG } from "@/constants/file";
 import WorkPage from "@/features/work/pages";
 import { getAllWorks } from "@/helpers/work";
 import { Post } from "@/type";
@@ -20,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) {
     return {};
   }
+
   return {
     title: post.title,
     description: post.excerpt,
@@ -44,6 +47,10 @@ export default async function Page({ params }: Props) {
     (post) => post.encodedFileName === slug || post.fileName === slug || post.fileName === decodedSlug
   );
 
+  if (slug === NO_CONTENTS_YET_DUMMY_SLUG) {
+    return <EmptyData />;
+  }
+
   if (!post) {
     return notFound();
   }
@@ -55,6 +62,9 @@ export function generateStaticParams() {
   const posts = getAllWorks();
   const encodedPosts: { slug: string }[] = posts.map((post) => ({ slug: post.encodedFileName }));
   const nonEncodedPosts: { slug: string }[] = posts.map((post) => ({ slug: post.fileName }));
+  if (posts.length === 0) {
+    return [{ slug: NO_CONTENTS_YET_DUMMY_SLUG }];
+  }
   return [...encodedPosts, ...nonEncodedPosts];
 }
 

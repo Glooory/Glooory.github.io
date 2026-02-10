@@ -38,7 +38,8 @@ const withMDX = createMDX({
 });
 
 const isProd = process.env.NODE_ENV === "production";
-const basePath = isProd ? new URL(appConfig.baseUrl).pathname : "";
+let basePath = isProd ? new URL(appConfig.baseUrl).pathname : "";
+basePath = basePath === "/" ? "" : basePath;
 
 export default withBundleAnalyzer(
   withMDX({

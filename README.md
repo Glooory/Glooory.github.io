@@ -10,7 +10,11 @@ A simple and clean blog template built with Next.js SSG, MDX, and Mantine. [Live
    ```bash
    git checkout template
    ```
-3. Configure your site: Update the settings in `app.config.mjs`(e.g., site name, description).
+3. Configure your site: Update the settings in `app.config.mjs`.
+   **Critical**: Update `baseUrl` to your actual production URL (e.g., `https://username.github.io/repo-name`).
+   - The app extracts the pathname from `baseUrl` to set the Next.js `basePath`.
+   - Incorrect configuration will cause broken assets and links in production (especially on GitHub Pages).
+   - If deploying to a custom domain (e.g., `https://myblog.com`), set it to that domain.
 4. Install dependencies:
    ```bash
    npm install

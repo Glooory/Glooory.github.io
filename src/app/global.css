@@ -226,8 +226,10 @@ a:focus-visible {
   border-radius: 2px;
 }
 
-img {
+img,
+svg {
   max-width: 100%;
+  max-height: fit-content;
 }
 
 ul,

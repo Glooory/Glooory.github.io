@@ -1,6 +1,13 @@
-import { createTheme } from "@mantine/core";
+import { Button, createTheme } from "@mantine/core";
 
 export const theme = createTheme({
   primaryColor: "blue",
-  defaultRadius: "md",
+  defaultRadius: "sm",
+  components: {
+    Button: Button.extend({
+      defaultProps: {
+        loaderProps: { size: "sm" },
+      },
+    }),
+  },
 });

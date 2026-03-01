@@ -2,10 +2,13 @@ import "./normalize.css";
 //
 import "@mantine/core/styles.layer.css";
 //
+import "@mantine/notifications/styles.layer.css";
+//
 import "./global.css";
 
 import { ReactNode } from "react";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -40,6 +43,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className={styles["root-container"]}>
         <CustomMantineProvider>
+          <Notifications position="top-right" />
           <Header />
           <div className={styles.content}>{children}</div>
           <Footer />

@@ -65,7 +65,9 @@ export const broadcastMessages = [
 
 const CheckoutBroadcastButton = () => {
   const onFinishClick = () => {
-    const message = broadcastMessages[random(0, broadcastMessages.length - 1)].replace("{0}", "张三");
+    const usernames = ["张三", "李四", "王五"];
+    const username = usernames[random(0, usernames.length - 1)];
+    const message = broadcastMessages[random(0, broadcastMessages.length - 1)].replace("{0}", username);
     notifications.show({ message });
   };
 

@@ -1,0 +1,40 @@
+---
+title: "滥用展开运算符翻车了"
+publishedAt: "2025-06-10 07:55:18"
+updatedAt: ""
+tags: []
+categories: [经验杂谈]
+---
+
+import SpreadPerformanceDemo from "@content/components/SpreadPerformanceDemo";
+
+最近在做一个文件上传的功能时发现了一个问题，就是如果拖拽一个含有大量文件的文件夹进行上传时，画面上会卡顿几秒才会响应，排查出来导致这个问题的代码如下：
+
+```ts {5}
+const folderFilesMap: Record<string, string[]> = {};
+
+files.forEach((file) => {
+  const { folder, path } = file;
+  folderFilesMap[folder] = [...(folderFilesMap[folder] ?? []), path];
+});
+```
+
+问题出现在第 4 行赋值运算符的右侧，滥用了展开运算符导致的，至于当初为什么这么写，一是可能习惯了使用展开运算符，二是可能因为这样写只有一行代码看上去比下面用 `if` 判断的写法“优雅”一点：
+
+```ts {5-7}
+const folderFilesMap: Record<string, string[]> = {};
+
+files.forEach((file) => {
+  const { folder, path } = file;
+  if (!folderFilesMap[folder]) {
+    folderFilesMap[folder] = [];
+  }
+  folderFilesMap[folder].push(path);
+});
+```
+
+以前可能因为运算数据量都不大没有暴雷，这次遇到了大量数据计算的场景一下就翻车了，以后不能再这么写了。
+
+至于两种写法的差距有多大可以亲自试试看看：
+
+<SpreadPerformanceDemo />

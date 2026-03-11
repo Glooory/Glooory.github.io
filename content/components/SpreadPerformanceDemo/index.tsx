@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { Button, Slider } from "@mantine/core";
+import { CodeBlock } from "@/components/CodeBlock";
 import styles from "./styles.module.css";
 
 const sliderRange: [number, number] = [1_000, 100_000];
@@ -54,8 +55,9 @@ const SpreadPerformanceDemo = () => {
       <div className={styles.content}>
         <div className={styles.column}>
           <h6>使用展开运算符：</h6>
-          <pre>
-            {`const folderFilesMap: Record<string, string[]> = {};
+          <CodeBlock>
+            <code>
+              {`const folderFilesMap: Record<string, string[]> = {};
             
 files.forEach((file) => {
   const { folder, path } = file;
@@ -66,13 +68,15 @@ files.forEach((file) => {
   ];
   
 });`}
-          </pre>
+            </code>
+          </CodeBlock>
           <div>耗时: {calculating ? "计算中..." : `${useSpreadCost}(ms)`}</div>
         </div>
         <div className={styles.column}>
           <h6>使用 if 判断：</h6>
-          <pre>
-            {`const folderFilesMap: Record<string, string[]> = {};
+          <CodeBlock>
+            <code>
+              {`const folderFilesMap: Record<string, string[]> = {};
             
 todos.forEach((todo) => {
   const { folder, path } = file;
@@ -83,7 +87,8 @@ todos.forEach((todo) => {
   folderFilesMap[folder].push(path);
   
 });`}
-          </pre>
+            </code>
+          </CodeBlock>
           <div>耗时: {calculating ? "计算中..." : `${useIfCost}(ms)`}</div>
         </div>
       </div>

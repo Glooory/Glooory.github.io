@@ -1,0 +1,217 @@
+---
+title: "浏览器里如何判断用户拖入了一个空文件夹"
+publishedAt: "2025-06-21 07:46:04"
+updatedAt: ""
+tags: []
+categories: ["经验杂谈"]
+---
+
+import { UploadDirectoryDemo } from "@content/components/UploadDirectoryDemo";
+
+最近在做一个类似网盘的功能，看了下类似的网站才发现原来在浏览器里可以选/拖文件夹来上传整个文件夹。
+
+查了下文档发现是基于被现代浏览器广泛实现但不是标准的接口（`webkitdirectory` 属性）来实现的：
+
+```js /webkitdirectory/
+<input type="file" webkitdirectory multiple />
+```
+
+- `type="file"`: 能够让用户选择文件
+- `webkitdirectory`: 告诉浏览器允许选择文件夹
+- `multiple`: 对于“选择”动作加了这个属性也只能选择一个文件夹，但是可以拖入多个文件夹
+
+如果是 React 项目可能需要[改一下写法](https://github.com/facebook/react/issues/3468):
+
+```ts {9} /webkitdirectory=""/
+declare module 'react' {
+  interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
+    directory?: string;
+    webkitdirectory?: string;
+  }
+}
+
+
+<input type="file" webkitdirectory="" onChange={e => console.log(e.target.files)} />
+```
+
+所以其实实现选/拖文件夹并不难，给 `input` 标签加上一个 `webkitdirectory` 属性即可，然后就可以通过 `onChange` 回调拿到文件夹里面的所有文件。每个文件的路径信息(`webkitRelativePath`)也是可以拿到的：
+
+```json {6, 13}
+// console.log(e.target.files)
+
+[
+  {
+    "name": "111.pdf",
+    "webkitRelativePath": "AAA/111.pdf",
+    "size": 13163,
+    "type": "application/pdf"
+    ...
+  },
+  {
+    "name": "444.pdf",
+    "webkitRelativePath": "AAA/CCC/DDD/444.pdf",
+    "size": 45382,
+    "type": "application/pdf"
+    ...
+  }
+]
+```
+
+拿到所有的文件数据应该就好办了，是不是很简单？
+
+但是真正让我扣脑袋的是一个看上去很不起眼的需求：如果用户选/拖的是一个空文件夹则需要提醒一下用户。
+
+如果是鼠标点击按钮选择文件夹的情况，其实每次浏览器有自带的提示框提示（有多少个文件）：
+
+```plaintext
++--------------------------------------------------------------+
+| 将 0 个文件上传到此网站?                                        |
+|                                                              |
+| 此操作会上传“XXX”下的所有文件。请仅在你信任该网站的情况下执行此操作。   |
+|                                                              |
+|                                                              |
+|                                       [取消]      [上传]      |
++--------------------------------------------------------------+
+```
+
+难点在于如果是拖入的一个空文件夹，根本就不会触发 `input` 标签的 `onChange` 回调，所以拖入的情况依靠 `onChange` 回调来实现提示不可能，只能换其他的方式。  
+既然拖入空文件夹时通过 `onChange` 回调实现不了，那 `onDrop` 回调应该能判断拖入的是一个空文件夹吧？
+
+试一下就知道：
+
+```tsx {5}
+<input
+  type="file"
+  webkitdirectory=""
+  onChange={(e) => console.log(e.target.files)}
+  onDrop={(e) => console.log(e.dataTransfer.files)}
+/>
+```
+
+下面是拖入一个空文件夹 `onDrop` 回调的打印结果：
+
+```json
+[
+  {
+    "name": "EEE",
+    "size": 64,
+    "[[Prototype]]": {
+      "type": ""
+    }
+    ...
+  }
+]
+```
+
+下面是拖入一个文件 `onDrop` 回调的打印结果：
+
+```json
+[
+  {
+    "name": "333.pdf",
+    "size": 1516414,
+    "[[Prototype]]": {
+      "type": "application/pdf"
+    }
+    ...
+  }
+]
+```
+
+看上面的两种结果貌似没法区分拖入的是 **一个空文件夹** 还是 **一个文件**(靠 `name`、`size`或 `type` 属性判断不靠谱)，它们都是 [File](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/files) 对象，区分不出来是文件还是文件夹。  
+所以现在解决问题的关键就是怎么区分文件和文件夹了，好消息是可以通过 `onDrop` 回调参数的 [event.dataTransfer.items](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/items) 里面的 [webkitGetAsEntry](https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry) 函数结果来区分。  
+如果是文件夹的话还需要使用 [readEntries](https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryReader/readEntries) 函数递归看看它里面是否有任何文件，如果遍历完不包含任何文件则是空文件夹，至此我们实现需求的思路也基本清晰明朗了。详细的代码片段参考：
+
+```tsx
+const UploadDirectoryDemo = () => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("onChange files:", e.target.files);
+    // 拿到文件数据，开始上传...
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLInputElement>) => {
+    // 如果 preventDefault 了的话，不会再触发 onChange，这里不用 preventDefault 以延用 onChange 里面的逻辑，
+    // e.preventDefault();
+
+    const items = e.dataTransfer.items;
+
+    const checkIfDirectoryHasFiles = (
+      directoryEntry: FileSystemEntry & {
+        createReader?: () => FileSystemDirectoryReader;
+      }
+    ): Promise<boolean> => {
+      return new Promise((resolve, reject) => {
+        let pendingDirectories = 0;
+
+        const readEntries = (
+          entry: FileSystemEntry & {
+            createReader?: () => FileSystemDirectoryReader;
+          }
+        ) => {
+          pendingDirectories++;
+
+          const reader = entry?.createReader?.();
+          reader?.readEntries((entries: FileSystemEntry[]) => {
+            const fileEntries: FileSystemEntry[] = [];
+            const directoryEntries: FileSystemEntry[] = [];
+
+            entries.forEach((entry) => {
+              if (entry.isDirectory) {
+                directoryEntries.push(entry);
+              } else {
+                fileEntries.push(entry);
+              }
+            });
+
+            if (fileEntries.length > 0) {
+              resolve(true);
+              return;
+            }
+
+            for (const childEntry of directoryEntries) {
+              readEntries(childEntry);
+            }
+
+            pendingDirectories--;
+
+            if (pendingDirectories === 0) {
+              resolve(false);
+            }
+          }, reject);
+        };
+
+        readEntries(directoryEntry);
+      });
+    };
+
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      // webkitGetAsEntry 在大部分现代浏览器(Chrome, Firefox, Safari)都能使用
+      const entry = item.webkitGetAsEntry();
+
+      if (entry?.isDirectory) {
+        checkIfDirectoryHasFiles(entry).then((hasFiles) => {
+          if (!hasFiles) {
+            // 提醒用户拖入了一个空文件夹
+            console.log(`Empty Directory ${entry.name} Detected!`);
+          }
+        });
+      }
+    }
+  };
+
+  return (
+    <input
+      multiple
+      type="file"
+      webkitdirectory=""
+      onChange={handleChange}
+      onDrop={handleDrop}
+    />
+  );
+};
+```
+
+现在看，判断是否拖入了空文件夹比想象中的要复杂些，好在最后也算能实现这个需求，不过使用的都不是标准的接口，虽然目前大部分的现代浏览器都能使用，但是这确实是一个不确定的因素。
+
+_**拖/选文件夹 Live Demo →**_： <UploadDirectoryDemo />

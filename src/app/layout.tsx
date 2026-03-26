@@ -11,6 +11,7 @@ import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { ScrollAwareSeparator } from "@/components/ScrollAwareSeparator";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import CustomMantineProvider from "@/lib/theme/CustomMantineProvider";
 import { appConfig } from "../../app.config.mjs";
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Notifications position="top-right" />
           <Header />
           <div className={styles.content}>{children}</div>
+          <ScrollAwareSeparator />
           <Footer />
           <ScrollToTop />
         </CustomMantineProvider>

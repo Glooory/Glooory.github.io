@@ -1,0 +1,7 @@
+.post-footer-separator {
+  margin: var(--space-3xl) 0;
+  text-align: center;
+  color: var(--secondary-text-color);
+  font-family: var(--font-mono);
+  user-select: none;
+}

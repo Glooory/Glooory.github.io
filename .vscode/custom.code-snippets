@@ -7,7 +7,7 @@
   "New React Functional Component": {
     "prefix": "nc",
     "body": [
-      "\"use client;\"",
+      "\"use client\";",
       "",
       "import styles from \"./styles.module.css\"",
       "",

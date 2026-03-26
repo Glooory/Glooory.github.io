@@ -62,23 +62,37 @@ const UploadDirectoryDemo = () => {
       });
     };
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      // webkitGetAsEntry works in most modern browsers (Chrome, Firefox, Safari)
-      const entry = item.webkitGetAsEntry();
-
-      if (entry?.isDirectory) {
-        checkIfDirectoryHasFiles(entry).then((hasFiles) => {
-          if (!hasFiles) {
-            console.log(`Empty Directory ${entry.name} Detected!`);
-            notifications.show({ title: "请选择非空文件夹上传", message: `空文件夹(${entry.name})不会被上传。` });
-          }
+    Promise.all(
+      Array.from(items)
+        .filter((item) => !!item.webkitGetAsEntry()?.isDirectory)
+        .map((item) => {
+          const entry = item.webkitGetAsEntry()!;
+          return checkIfDirectoryHasFiles(entry).then((hasFiles) => {
+            return { name: entry.name, hasFiles };
+          });
+        })
+    ).then((res) => {
+      const emptyDirectories = res.filter((entry) => !entry.hasFiles).map((entry) => entry.name);
+      if (emptyDirectories.length) {
+        console.log(`Empty Directory ${emptyDirectories.join(", ")} Detected!`);
+        notifications.show({
+          title: "请选择非空文件夹上传",
+          message: `空文件夹(${emptyDirectories.join(", ")})不会被上传。`,
         });
       }
-    }
+    });
   };
 
-  return <input multiple type="file" webkitdirectory="" onChange={handleChange} onDrop={handleDrop} />;
+  return (
+    <input
+      multiple
+      type="file"
+      webkitdirectory=""
+      title="点击选择空文件夹或拖入空文件夹"
+      onChange={handleChange}
+      onDrop={handleDrop}
+    />
+  );
 };
 
 export { UploadDirectoryDemo };

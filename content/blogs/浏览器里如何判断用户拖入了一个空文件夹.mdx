@@ -184,20 +184,24 @@ const UploadDirectoryDemo = () => {
       });
     };
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      // webkitGetAsEntry 在大部分现代浏览器(Chrome, Firefox, Safari)都能使用
-      const entry = item.webkitGetAsEntry();
-
-      if (entry?.isDirectory) {
-        checkIfDirectoryHasFiles(entry).then((hasFiles) => {
-          if (!hasFiles) {
-            // 提醒用户拖入了一个空文件夹
-            console.log(`Empty Directory ${entry.name} Detected!`);
-          }
-        });
+    Promise.all(
+      Array.from(items)
+        .filter((item) => !!item.webkitGetAsEntry()?.isDirectory)
+        .map((item) => {
+          const entry = item.webkitGetAsEntry()!;
+          return checkIfDirectoryHasFiles(entry).then((hasFiles) => {
+            return { name: entry.name, hasFiles };
+          });
+        })
+    ).then((res) => {
+      const emptyDirectories = res
+        .filter((entry) => !entry.hasFiles)
+        .map((entry) => entry.name);
+      if (emptyDirectories.length) {
+        // 提醒用户拖入了空文件夹
+        console.log(`Empty Directory ${emptyDirectories.join(", ")} Detected!`);
       }
-    }
+    });
   };
 
   return (
@@ -214,4 +218,6 @@ const UploadDirectoryDemo = () => {
 
 现在看，判断是否拖入了空文件夹比想象中的要复杂些，好在最后也算能实现这个需求，不过使用的都不是标准的接口，虽然目前大部分的现代浏览器都能使用，但是这确实是一个不确定的因素。
 
-_**拖/选文件夹 Live Demo →**_： <UploadDirectoryDemo />
+_**拖/选空文件夹 Live Demo ↓**_：
+
+<UploadDirectoryDemo />
